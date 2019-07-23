@@ -1,0 +1,5 @@
+#ignore local Debugging setting`
+.vscode
+.DS_Store
+node_modules
+public/bundle.*
