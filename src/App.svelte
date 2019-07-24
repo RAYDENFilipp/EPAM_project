@@ -1,6 +1,6 @@
 <script>
   import Navbar from "./components/Navbar/Navbar.svelte";
-  import { onMount } from "svelte";
+  import Imageslider from "./components/Imageslider/Imageslider.svelte";
   export let name;
 </script>
 
@@ -11,5 +11,6 @@
 </style>
 
 <Navbar />
+<Imageslider />
 
 <h1>Hello {name}!</h1>
