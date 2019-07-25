@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "./stores.js";
+  import { slideIndex } from "../../utilities/stores";
   import { onMount, beforeUpdate } from "svelte";
   import CarouselIndicators from "./CarouselIndicators.svelte";
   import CarouselSlides from "./CarouselSlides.svelte";
@@ -24,9 +24,16 @@
   });
 </script>
 
+<style>
+  header {
+    max-width: 800px;
+    min-width: 300px;
+  }
+</style>
+
 <header
   id="carouselExampleIndicators"
-  class="carousel slide h-25"
+  class="carousel slide h-25 mx-auto"
   data-ride="carousel">
   <CarouselIndicators />
   <CarouselSlides />

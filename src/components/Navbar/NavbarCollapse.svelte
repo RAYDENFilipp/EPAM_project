@@ -17,7 +17,7 @@
       <a class="nav-link" href="#contact">Contacts</a>
     </li>
   </ul>
-  <form class="form-inline mt-2 mt-md-0">
+  <form class="form-inline mt-2 mt-md-0 mr-lg-2">
     <input
       class="form-control mr-sm-2"
       type="text"

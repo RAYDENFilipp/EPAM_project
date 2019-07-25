@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "./stores.js";
+  import { slideIndex } from "../../utilities/stores";
   import { fade } from "svelte/transition";
 
   let images = [
@@ -37,8 +37,6 @@
   }
 
   .carousel__caption--transparent {
-    max-width: 500px;
-    min-width: 70%;
     opacity: 0.8;
   }
 </style>
@@ -54,7 +52,7 @@
         align-items-center"
         style="background-image: url({src});"
         transition:fade>
-        <section class="carousel__caption--transparent {color} bg-dark px-2">
+        <section class="carousel__caption--transparent {color} bg-dark px-2 mx-5 my-auto">
           <h2>{caption}</h2>
           <p class="h5">This is a paragraph for the {caption}.</p>
         </section>

@@ -6,6 +6,7 @@
 <style>
   button {
     background: transparent;
+    max-width: 4rem;
     outline: none;
     text-decoration: none;
   }
