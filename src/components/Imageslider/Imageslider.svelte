@@ -1,35 +1,41 @@
 <script>
-  import CarouselIndicators from './CarouselIndicators.svelte';
-  import CarouselInner from './CarouselInner.svelte';
+  import { slideIndex } from "./stores.js";
+  import { onMount, beforeUpdate } from "svelte";
+  import CarouselIndicators from "./CarouselIndicators.svelte";
+  import CarouselSlides from "./CarouselSlides.svelte";
+  import CarouselButton from "./CarouselButton.svelte";
 
-  let images = [
+  let autoSlideInterval;
 
-  ]
+  /** In case If user's frequency of clicking might interfere with
+   * the interval we clear the interval first
+   */
+  beforeUpdate(() => {
+    if (autoSlideInterval) clearInterval(autoSlideInterval);
+  });
 
+  // this sets autoslider to run when the component is mounted to the DOM
+  onMount(() => {
+    autoSlideInterval = setInterval(() => {
+      slideIndex.increment();
+    }, 7000);
+    // when component is unmounted (onDestroy event)
+    return () => clearInterval(autoSlideInterval);
+  });
 </script>
 
-<style>
-  /* your styles go here */
-</style>
-
-<!-- markup (zero or more items) goes here -->
-<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
+<header
+  id="carouselExampleIndicators"
+  class="carousel slide h-25"
+  data-ride="carousel">
   <CarouselIndicators />
-  <CarouselInner />
-  <a
-    class="carousel-control-prev"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true" />
-    <span class="sr-only">Previous</span>
-  </a>
-  <a
-    class="carousel-control-next"
-    href="#carouselExampleIndicators"
-    role="button"
-    data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true" />
-    <span class="sr-only">Next</span>
-  </a>
-</div>
+  <CarouselSlides />
+  <CarouselButton
+    direction="prev"
+    screenReaderValue="Previous"
+    on:click={slideIndex.decrement} />
+  <CarouselButton
+    direction="next"
+    screenReaderValue="Next"
+    on:click={slideIndex.increment} />
+</header>
