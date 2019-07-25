@@ -1,15 +1,25 @@
 <script>
   import NavbarCollapse from "./NavbarCollapse.svelte";
+  import { onMount } from "svelte";
 
+// used to control behaviour of the navbar-toggler
   let collapse = true;
+
+  let navbar;
+
+  /** When component is first rendered to the DOM, we have to
+   * set the body's padding-top to compensate fixed navbar height
+   */
+  onMount(() => {
+    const body = document.body;
+    body.style.paddingTop = `${navbar.clientHeight}px`;
+  });
 </script>
 
-<style>
-  /* your styles go here */
-</style>
-
-<nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
-  <a class="navbar-brand" href="#">Project Blog</a>
+<nav
+  bind:this={navbar}
+  class="navbar fixed-top navbar-expand-md navbar-dark bg-dark mb-4">
+  <h1 class="navbar-brand">Project: Blog</h1>
   <button class="navbar-toggler" on:click={() => (collapse = !collapse)}>
     <span class="navbar-toggler-icon" />
   </button>
