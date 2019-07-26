@@ -2,6 +2,11 @@
   import { slideIndex } from "../../utilities/stores";
   import { fade } from "svelte/transition";
 
+  /* Media to bundle */
+  import "../../media/img_lights_wide.jpg";
+  import "../../media/img_mountains_wide.jpg";
+  import "../../media/img_nature_wide.jpg";
+
   let images = [
     {
       id: 0,
@@ -52,7 +57,9 @@
         align-items-center"
         style="background-image: url({src});"
         transition:fade>
-        <section class="carousel__caption--transparent {color} bg-dark px-2 mx-5 my-auto">
+        <section
+          class="carousel__caption carousel__caption--transparent {color}
+          bg-dark px-2 mx-auto my-5">
           <h2>{caption}</h2>
           <p class="h5">This is a paragraph for the {caption}.</p>
         </section>
