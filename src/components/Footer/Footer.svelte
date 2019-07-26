@@ -1,52 +1,57 @@
-<script>
-  // your script goes here
-</script>
-
 <style>
-  /* your styles go here */
+  iframe {
+    height: 300px;
+    width: inherit;
+  }
 </style>
 
-<footer class="footer text-center bg-dark text-light">
+<footer class="footer bg-dark text-light" id="contacts">
   <div class="container">
-    <div class="row">
+    <article class="row">
 
       <!-- Footer Location -->
-      <div class="col-lg-4 mb-5 mb-lg-0">
-        <h4 class="text-uppercase mb-4">Location</h4>
+      <section class="col-lg-6 mb-5 mt-3">
+        <h4 class="text-uppercase mb-4">Find us</h4>
         <p class="lead mb-0">
-          2215 John Daniel Drive
+          Solomianska St, 7,
           <br />
-          Clark, MO 65243
+          Kyiv, 03110
         </p>
-      </div>
-
-      <!-- Footer Social Icons -->
-      <div class="col-lg-4 mb-5 mb-lg-0">
-        <h4 class="text-uppercase mb-4">Around the Web</h4>
-        <a class="btn btn-outline-light btn-social mx-1" href="#">
+        <br />
+        <a
+          class="btn btn-outline-light btn-social mx-1"
+          href="https://www.facebook.com/"
+          target="_blank"
+          aria-label="Visit us at Facebook"
+          rel="noreferrer">
           <i class="fab fa-fw fa-facebook-f" />
         </a>
-        <a class="btn btn-outline-light btn-social mx-1" href="#">
+        <a
+          class="btn btn-outline-light btn-social mx-1"
+          href="https://twitter.com/?lang=en"
+          target="_blank"
+          aria-label="Visit us at Twitter"
+          rel="noreferrer">
           <i class="fab fa-fw fa-twitter" />
         </a>
-        <a class="btn btn-outline-light btn-social mx-1" href="#">
+        <a
+          class="btn btn-outline-light btn-social mx-1"
+          href="https://www.linkedin.com/"
+          target="_blank"
+          aria-label="Visit us at Linked-In"
+          rel="noreferrer">
           <i class="fab fa-fw fa-linkedin-in" />
         </a>
-        <a class="btn btn-outline-light btn-social mx-1" href="#">
-          <i class="fab fa-fw fa-dribbble" />
-        </a>
-      </div>
+      </section>
 
-      <!-- Footer About Text -->
-      <div class="col-lg-4">
-        <h4 class="text-uppercase mb-4">About Freelancer</h4>
-        <p class="lead mb-0">
-          Freelance is a free to use, MIT licensed Bootstrap theme created by
-          <a href="http://startbootstrap.com">Start Bootstrap</a>
-          .
-        </p>
+      <!-- Footer Map -->
+      <div class="col-lg-6 mb-3 mt-lg-3">
+        <iframe
+          class="border-0"
+          title="State University of Telecommunications on the map"
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12090.613512847922!2d30.46984709125832!3d50.4273456508177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x638e8cfbdbe5fddc!2sState+University+of+Telecommunications!5e0!3m2!1sen!2sua!4v1564161731057!5m2!1sen!2sua"
+          allowfullscreen />
       </div>
-
-    </div>
+    </article>
   </div>
 </footer>
