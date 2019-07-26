@@ -14,7 +14,7 @@
       <a class="nav-link" href="#blog">Blog</a>
     </li>
     <li class="nav-item">
-      <a class="nav-link" href="#contact">Contacts</a>
+      <a class="nav-link" href="#contacts">Contacts</a>
     </li>
   </ul>
   <form class="form-inline mt-2 mt-md-0 mr-lg-2">

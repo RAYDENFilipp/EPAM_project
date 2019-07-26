@@ -25,15 +25,11 @@
 </script>
 
 <style>
-  header {
-    max-width: 800px;
-    min-width: 300px;
-  }
-</style>
 
+</style>
 <header
-  id="carouselExampleIndicators"
-  class="carousel slide h-25 mx-auto"
+  id="home"
+  class="container carousel slide h-25 mx-auto mt-2"
   data-ride="carousel">
   <CarouselIndicators />
   <CarouselSlides />
