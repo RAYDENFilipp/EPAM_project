@@ -29,7 +29,7 @@
 </style>
 <header
   id="home"
-  class="container carousel slide h-25 mx-auto mt-2"
+  class=" carousel slide h-25 pt-2"
   data-ride="carousel">
   <CarouselIndicators />
   <CarouselSlides />

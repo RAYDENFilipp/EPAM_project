@@ -3,41 +3,53 @@
   import Post from "./Post.svelte";
   import SearchWidget from "./SearchWidget.svelte";
   import Pagination from "./Pagination.svelte";
+  import Imageslider from "../Imageslider/Imageslider.svelte";
+  import Footer from "../Footer/Footer.svelte";
 </script>
 
 <style>
-  /* your styles go here */
+  [data-window="main"] {
+    height: inherit;
+    overflow-y: scroll;
+  }
 </style>
 
-<main class="container" id="blog">
+<div data-window="main">
+  <main class="container">
 
-  <div class="row">
+    <Imageslider />
 
-    <!-- Blog Entries Column -->
-    <div class="col-md-8">
+    <div class="row" id="blog">
 
-      <h1 class="my-4">
-        Page Heading
-        <small>Secondary Text</small>
-      </h1>
+      <!-- Blog Entries Column -->
+      <div class="col-md-8">
 
-      <PostItem />
-      <PostItem />
-      <PostItem />
-      <PostItem />
+        <h1 class="my-4">
+          Page Heading
+          <small>Secondary Text</small>
+        </h1>
 
-      <Pagination />
+        <PostItem />
+        <PostItem />
+        <PostItem />
+        <PostItem />
+        <Post />
+
+        <Pagination />
+
+      </div>
+
+      <!-- Sidebar Widgets Column -->
+      <div class="col-md-4">
+
+        <SearchWidget />
+
+      </div>
 
     </div>
+    <!-- /.row -->
 
-    <!-- Sidebar Widgets Column -->
-    <div class="col-md-4">
+  </main>
+  <Footer />
 
-      <SearchWidget />
-
-    </div>
-
-  </div>
-  <!-- /.row -->
-
-</main>
+</div>

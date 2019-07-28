@@ -24,7 +24,7 @@
           target="_blank"
           aria-label="Visit us at Facebook"
           rel="noreferrer">
-          <i class="fab fa-fw fa-facebook-f" />
+          <i class="fab fa-facebook-f" />
         </a>
         <a
           class="btn btn-outline-light btn-social mx-1"
@@ -32,7 +32,7 @@
           target="_blank"
           aria-label="Visit us at Twitter"
           rel="noreferrer">
-          <i class="fab fa-fw fa-twitter" />
+          <i class="fab fa-twitter" />
         </a>
         <a
           class="btn btn-outline-light btn-social mx-1"
@@ -40,7 +40,7 @@
           target="_blank"
           aria-label="Visit us at Linked-In"
           rel="noreferrer">
-          <i class="fab fa-fw fa-linkedin-in" />
+          <i class="fab fa-linkedin-in" />
         </a>
       </section>
 
