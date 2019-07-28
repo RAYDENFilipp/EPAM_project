@@ -28,7 +28,7 @@
     scrollSmoothly(element);
     // Add hash (#) to URL (default click behavior)
     // Also we have to ensure that our scroll ends before the window.hash update
-    timeScroll = setTimeout(() => (window.location.hash = href), 800);
+    timeScroll = setTimeout(() => (window.location.hash = href), 730);
   }
 
   function scrollSmoothly(element) {
