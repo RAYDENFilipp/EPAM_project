@@ -1,8 +1,5 @@
 <script>
-  import SmoothScroll from "smooth-scroll";
   export let collapsed = true;
-
-  // animation polifill for old Browsers
 
   let links = [
     { active: true, href: "#home", text: "Home" },
@@ -10,12 +7,16 @@
     { active: false, href: "#contacts", text: "Contacts" }
   ];
 
-    let scroll = new SmoothScroll('a[href*="#"]', {
-      speed: 600,
-      speedAsDuration: true
-    });
+  let timeScroll;
 
-  function handleClick(active, href) {
+  function handleClick(active, href, e) {
+    // to clear previous click window.hash delayed update
+    clearTimeout(timeScroll);
+    const userAgent = window.navigator.userAgent;
+    const element = document.querySelector(href);
+    // /avoid preventing default since this feature won't work in IE 11
+    if (!~userAgent.indexOf("Trident")) e.preventDefault();
+
     if (!active) {
       links = links.map(link => {
         link.active =
@@ -23,6 +24,24 @@
         return link;
       });
     }
+
+    scrollSmoothly(element);
+    // Add hash (#) to URL (default click behavior)
+    // Also we have to ensure that our scroll ends before the window.hash update
+    timeScroll = setTimeout(() => (window.location.hash = href), 800);
+  }
+
+  function scrollSmoothly(element) {
+    const main = document.querySelector("[data-window='main']");
+    const bodyPadding = window.getComputedStyle(document.body).paddingTop;
+
+    main.scrollTo({
+      behavior: "smooth",
+      top:
+        element.getBoundingClientRect().top +
+        main.scrollTop -
+        parseInt(bodyPadding)
+    });
   }
 </script>
 
@@ -42,8 +61,8 @@
 <div class:collapse={collapsed} class="navbar-collapse">
   <ul class="navbar-nav mr-auto">
     {#each links as { active, href, text }}
-      <li class:active class="nav-item border-light">
-        <a class="nav-link" {href} on:click={() => handleClick(active, href)}>
+      <li class:active class="nav-item border-light text-md-center">
+        <a class="nav-link" {href} on:click={e => handleClick(active, href, e)}>
           {text}
           {#if active}
             <span class="sr-only">(current)</span>
