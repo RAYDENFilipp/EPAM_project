@@ -25,7 +25,7 @@ export default {
       // we'll extract any component CSS out into
       // a separate file — better for performance
 
-      emitCss: true,
+      emitCss: false,
 
       css: css => {
         css.write("public/bundle.css");
@@ -33,7 +33,8 @@ export default {
     }),
 
     postcss({
-      plugins: [require("autoprefixer")]
+      plugins: [require("autoprefixer")],
+      minimize: true
     }),
 
     url({
@@ -44,7 +45,8 @@ export default {
     }),
 
     buble({
-      exclude: ["node_modules/@babel/**", "node_modules/core-js/**"]
+      exclude: ["node_modules/@babel/**", "node_modules/core-js/**"],
+      transforms: { asyncAwait: false }
     }),
     // If you have external dependencies installed from
     // npm, you'll most likely need these plugins. In
