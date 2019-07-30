@@ -36,12 +36,12 @@
     "browserslist": "last 2 versions",
     "repository": {
         "type": "git",
-        "url": "git+https://github.com/RAYDENFilipp/EPAM_project.git"
+        "url": "git+https://github.com/RAYDENFilipp/Final_project.git"
     },
     "author": "Philipp Lypniakov",
     "license": "ISC",
     "bugs": {
-        "url": "https://github.com/RAYDENFilipp/EPAM_project/issues"
+        "url": "https://github.com/RAYDENFilipp/Final_project/issues"
     },
-    "homepage": "https://github.com/RAYDENFilipp/EPAM_project#readme"
+    "homepage": "https://github.com/RAYDENFilipp/Final_project#readme"
 }
