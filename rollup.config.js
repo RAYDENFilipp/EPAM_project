@@ -3,7 +3,6 @@ import resolve from "rollup-plugin-node-resolve";
 import commonjs from "rollup-plugin-commonjs";
 import livereload from "rollup-plugin-livereload";
 import { terser } from "rollup-plugin-terser";
-// import babel from "rollup-plugin-babel";
 import postcss from "rollup-plugin-postcss";
 import url from "rollup-plugin-url";
 import buble from "rollup-plugin-buble";
@@ -45,7 +44,6 @@ export default {
     }),
 
     buble({
-      exclude: ["node_modules/@babel/**", "node_modules/core-js/**"],
       transforms: { asyncAwait: false }
     }),
     // If you have external dependencies installed from
@@ -63,32 +61,6 @@ export default {
     // Watch the `public` directory and refresh the
     // browser on changes when not in production
     !production && livereload("public"),
-
-    // compile to good old IE11 compatible ES5
-    // babel({
-    //     extensions: [".js", ".mjs", ".html", ".svelte"],
-    //     runtimeHelpers: true,
-    //     exclude: ["node_modules/@babel/**", "node_modules/core-js/**"],
-    //     presets: [
-    //         [
-    //             "@babel/preset-env",
-    //             {
-    //                 targets: "> 1%",
-    //                 useBuiltIns: "usage",
-    //                 corejs: 3
-    //             }
-    //         ]
-    //     ],
-    //     plugins: [
-    //         "@babel/plugin-syntax-dynamic-import",
-    //         [
-    //             "@babel/plugin-transform-runtime",
-    //             {
-    //                 useESModules: true
-    //             }
-    //         ]
-    //     ]
-    // }),
     // If we're building for production (npm run build
     // instead of npm run dev), minify
     production && terser()
