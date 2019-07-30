@@ -1,2 +1,2 @@
-# EPAM_project
+# Final project
 Project's topic: blog
