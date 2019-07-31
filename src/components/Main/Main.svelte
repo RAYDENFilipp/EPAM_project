@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { beforeUpdate } from "svelte";
   import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
   import Pagination from "./Pagination.svelte";
@@ -8,8 +8,14 @@
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
 
-  const getData = function() {
-    const data = fetch("http://localhost:3000/posts")
+  let page = 1;
+  let postPicked = false;
+  let postId;
+  const pageMax = Math.floor(getData(`/posts`).length / 10);
+  $: dataFetched = getData(`/posts?_page=${page}`);
+
+  function getData(query) {
+    const data = fetch(`http://localhost:3000${query}`)
       .then(response => response.json())
       .catch(e => {
         throw new Error(e);
@@ -17,9 +23,7 @@
     // const data = response.json();
 
     return data;
-  };
-
-  let dataBase = getData();
+  }
 </script>
 
 <style>
@@ -35,16 +39,16 @@
     <Imageslider />
 
     <div class="row" id="blog">
-      {#await dataBase}
+      {#await dataFetched}
         <!-- Pending spinner -->
         <PendingSpinner />
       {:then posts}
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-4">
-          {#each posts as post}
+          {#each posts as { title, slogan, date }}
             <PostItem />
           {/each}
-          <Pagination />
+          <Pagination bind:page pageMax />
         </div>
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
