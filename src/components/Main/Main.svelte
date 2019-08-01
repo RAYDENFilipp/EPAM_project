@@ -23,11 +23,6 @@
 
     return data;
   }
-
-  onMount(() => {
-    const pages = getData(`/posts`).then(pages => pages.length);
-    console.log(`Log: pages`, pages);
-  });
 </script>
 
 <style>
@@ -49,8 +44,8 @@
       {:then posts}
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-4">
-          {#each posts as {image, slogan, title, id, author_id, date}}
-            <PostItem {image} {slogan} {title} {id} {author_id} {date} />
+          {#each posts as { slogan, title, id, author_id, date }}
+            <PostItem {slogan} {title} {id} {author_id} {date} />
           {/each}
           <Pagination bind:pageCurrent pageEnd={posts.length} />
         </div>

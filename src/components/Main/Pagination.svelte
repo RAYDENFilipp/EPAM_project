@@ -7,7 +7,7 @@
   /* your styles go here */
 </style>
 
-{@debug pageEnd}
+<!-- {@debug pageEnd} -->
 <ul class="pagination justify-content-center mb-4">
   <li class="page-item">
     <button
