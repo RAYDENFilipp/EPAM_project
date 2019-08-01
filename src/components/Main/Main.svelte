@@ -1,5 +1,5 @@
 <script>
-  import { beforeUpdate } from "svelte";
+  import { onMount } from "svelte";
   import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
   import Pagination from "./Pagination.svelte";
@@ -8,11 +8,10 @@
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
 
-  let page = 1;
+  let pageCurrent = 1;
   let postPicked = false;
   let postId;
-  const pageMax = Math.floor(getData(`/posts`).length / 10);
-  $: dataFetched = getData(`/posts?_page=${page}`);
+  $: dataFetched = getData(`/posts?_page=${pageCurrent}`);
 
   function getData(query) {
     const data = fetch(`http://localhost:3000${query}`)
@@ -24,6 +23,11 @@
 
     return data;
   }
+
+  onMount(() => {
+    const pages = getData(`/posts`).then(pages => pages.length);
+    console.log(`Log: pages`, pages);
+  });
 </script>
 
 <style>
@@ -45,10 +49,10 @@
       {:then posts}
         <!-- Blog Entries Column -->
         <div class="col-md-8 mt-4">
-          {#each posts as { title, slogan, date }}
-            <PostItem />
+          {#each posts as {image, slogan, title, id, author_id, date}}
+            <PostItem {image} {slogan} {title} {id} {author_id} {date} />
           {/each}
-          <Pagination bind:page pageMax />
+          <Pagination bind:pageCurrent pageEnd={posts.length} />
         </div>
         <!-- Sidebar Widgets Column -->
         <div class="col-md-4">
