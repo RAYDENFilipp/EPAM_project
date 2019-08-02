@@ -15,7 +15,17 @@
 
   function getData(query) {
     const data = fetch(`http://localhost:3000${query}`)
-      .then(response => response.json())
+      .then(response => {
+        debugger;
+        if (response.ok) {
+          return response.json();
+        }
+        return {
+          failed: !response.ok,
+          status: response.status,
+          reason: response.statusText
+        };
+      })
       .catch(e => {
         throw new Error(e);
       });
@@ -42,19 +52,30 @@
         <!-- Pending spinner -->
         <PendingSpinner />
       {:then posts}
-        <!-- Blog Entries Column -->
-        <div class="col-md-8 mt-4">
-          {#each posts as { slogan, title, id, author_id, date }}
-            <PostItem {slogan} {title} {id} {author_id} {date} />
-          {/each}
-          <Pagination bind:pageCurrent pageEnd={posts.length} />
-        </div>
-        <!-- Sidebar Widgets Column -->
-        <div class="col-md-4">
+        {#if posts.failed}
+          <article class="my-2 mx-auto">
+            <h1 class="text-danger">Can't load the page.</h1>
+            <p class="h2 text-danger">Status: {posts.status}.</p>
+            <p class="h2 text-danger">Reason: {posts.reason}.</p>
+          </article>
+        {:else}
+          {#if !postPicked}
+            <!-- Blog Entries Column -->
+            <div class="col-md-8 mt-4">
+              {#each posts as { slogan, title, id, author_id, date }}
+                <PostItem {slogan} {title} {id} {author_id} {date} />
+              {/each}
+              <Pagination bind:pageCurrent pageEnd={posts.length} />
+            </div>
+            <!-- Sidebar Widgets Column -->
+            <div class="col-md-4">
 
-          <SearchWidget />
+              <SearchWidget />
 
-        </div>
+            </div>
+          {/if}
+          <Post />
+        {/if}
       {:catch error}
         <!-- On error message -->
         <div class="col-md-12 my-4 ml-5">
