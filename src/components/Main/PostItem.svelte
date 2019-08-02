@@ -1,59 +1,47 @@
 <script>
   import { onMount } from "svelte";
-  import { createDispatchEvent } from "svelte";
-  import { getData } from "../../utilities/utilities";
+  import { createEventDispatcher } from "svelte";
+  import { getData, parseDate } from "../../utilities/utilities";
 
-  export let slogan, title, id, author_id, date;
+  export let id, title, slogan, text, author_id, date, comments;
 
-  const months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December"
-  ];
+  const userPromise = getData(`/users?id=${author_id}`).then(
+    userArray => userArray[0]
+  );
 
-  let userObject = getData(`/users?id=${author_id}`);
+  const [month, year, datePrefixed] = parseDate(date);
 
-  const dateObj = new Date(date);
-  const dateMonth = months[dateObj.getMonth()];
-  const dateYear = dateObj.getFullYear();
-  const dateDate = dateObj.getDate();
-  const datePrefixed =
-    dateDate === 1 || dateDate === 31
-      ? dateDate + "st"
-      : dateDate === 2
-      ? dateDate + "nd"
-      : dateDate === 3 || dateDate === 23
-      ? dateDate + "rd"
-      : dateDate + "th";
+  const dispatch = createEventDispatcher();
+
+  function revealPost() {
+    dispatch("picked", {
+      id: id,
+      title: title,
+      slogan: slogan,
+      text: text,
+      authorPromise: userPromise,
+      date: { month: month, year: year, datePrefixed: datePrefixed },
+      comments: comments
+    });
+  }
 </script>
 
 <style>
   /* your styles go here */
 </style>
 
-{#await userObject}
-  <!-- promise is pending -->
-{:then user}
+{#await userPromise then user}
   <div class="card mb-4">
     <div class="card-body">
       <h2 class="card-title">{title}</h2>
       <p class="card-text">{slogan}</p>
-      <a href="#{id}" class="btn btn-primary">Read More →</a>
+      <a href="#posts/{id}" class="btn btn-primary" on:click={revealPost}>
+        Read More →
+      </a>
     </div>
     <div class="card-footer text-muted">
-      Posted on {dateMonth} {datePrefixed}, {dateYear} by
+      Posted on {month} {datePrefixed}, {year} by
       <em>{user.first_name} {user.last_name}</em>
     </div>
   </div>
-{:catch error}
-  <!-- promise was rejected -->
 {/await}

@@ -11,8 +11,13 @@
 
   let pageCurrent = 1;
   let postPicked = false;
-  let postId;
-  $: dataFetched = getData(`/posts?_page=${pageCurrent}`);
+  let postObject;
+  $: dataPromise = getData(`/posts?_page=${pageCurrent}`);
+
+  function showPost(event) {
+    postPicked = true;
+    postObject = event.detail;
+  }
 </script>
 
 <style>
@@ -28,7 +33,7 @@
     <Imageslider />
 
     <div class="row" id="blog">
-      {#await dataFetched}
+      {#await dataPromise}
         <!-- Pending spinner -->
         <PendingSpinner />
       {:then posts}
@@ -41,8 +46,8 @@
         {:else if !postPicked}
           <!-- Blog Entries Column -->
           <div class="col-md-8 mt-4">
-            {#each posts as { slogan, title, id, author_id, date }}
-              <PostItem {slogan} {title} {id} {author_id} {date} />
+            {#each posts as post}
+              <PostItem {...post} on:picked={showPost} />
             {/each}
             <Pagination bind:pageCurrent pageEnd={posts.length} />
           </div>
@@ -53,7 +58,7 @@
 
           </div>
         {:else}
-          <Post />
+          <Post {...postObject} />
         {/if}
       {:catch error}
         <!-- On error message -->
