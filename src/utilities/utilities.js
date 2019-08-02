@@ -15,4 +15,23 @@ function createslideIndexStore() {
   };
 }
 
-export const slideIndex = createslideIndexStore();
+function getData(query) {
+  return fetch(`http://localhost:3000${query}`)
+    .then(response => {
+      if (response.ok) {
+        return response.json();
+      }
+      return {
+        failed: !response.ok,
+        status: response.status,
+        reason: response.statusText
+      };
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
+}
+
+const slideIndex = createslideIndexStore();
+
+export { slideIndex, getData };

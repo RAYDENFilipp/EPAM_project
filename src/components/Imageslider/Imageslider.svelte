@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "../../utilities/stores";
+  import { slideIndex } from "../../utilities/utilities";
   import { onMount, beforeUpdate } from "svelte";
   import CarouselIndicators from "./CarouselIndicators.svelte";
   import CarouselSlides from "./CarouselSlides.svelte";

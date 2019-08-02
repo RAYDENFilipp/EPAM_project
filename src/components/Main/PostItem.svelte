@@ -1,6 +1,8 @@
 <script>
   import { onMount } from "svelte";
   import { createDispatchEvent } from "svelte";
+  import { getData } from "../../utilities/utilities";
+
   export let slogan, title, id, author_id, date;
 
   const months = [
@@ -18,7 +20,7 @@
     "December"
   ];
 
-  let userObject;
+  let userObject = getData(`/users?id=${author_id}`);
 
   const dateObj = new Date(date);
   const dateMonth = months[dateObj.getMonth()];
@@ -32,18 +34,6 @@
       : dateDate === 3 || dateDate === 23
       ? dateDate + "rd"
       : dateDate + "th";
-
-  function getItem() {
-    userObject = fetch(`http://localhost:3000/users?id=${author_id}`)
-      .then(response => response.json())
-      .then(data => data[0])
-      .catch(e => console.log(e));
-    console.log(`Log: user`, userObject);
-
-    return userObject;
-  }
-
-  getItem();
 </script>
 
 <style>

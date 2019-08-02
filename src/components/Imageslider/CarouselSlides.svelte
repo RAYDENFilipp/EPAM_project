@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "../../utilities/stores";
+  import { slideIndex } from "../../utilities/utilities";
   import { fade } from "svelte/transition";
 
   /* Media to bundle */
