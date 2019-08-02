@@ -5,7 +5,7 @@ import { writable } from "svelte/store";
  * to make changes by any of the involved components,
  * i.e. share state between indirectly related elements
  */
-function createslideIndexStore() {
+function createSlideIndexStore() {
   const { subscribe, update, set } = writable(0);
   return {
     subscribe,
@@ -15,6 +15,16 @@ function createslideIndexStore() {
   };
 }
 
+/**
+ * put a string query starting with '/'
+ * after whih the function will fetch data
+ * from the server and returns a Promise which when resolved
+ * returns a response of data (response is OK) or object with status and reason
+ * text to be used as a fallback value; rejects with an error if any happened.
+ *
+ * @param {String} query
+ * @returns Promise
+ */
 function getData(query) {
   return fetch(`http://localhost:3000${query}`)
     .then(response => {
@@ -32,6 +42,47 @@ function getData(query) {
     });
 }
 
-const slideIndex = createslideIndexStore();
+/**
+ * array of months names to be used in the parseDate()
+ */
+const months = [
+  "January",
+  "February",
+  "March",
+  "April",
+  "May",
+  "June",
+  "July",
+  "August",
+  "September",
+  "October",
+  "November",
+  "December"
+];
 
-export { slideIndex, getData };
+/**
+ *
+ *
+ * @param {Date} date
+ * @returns [dateMonth, dateYear, datePrefixed ]
+ */
+function parseDate(date) {
+  const dateObj = new Date(date);
+  const dateMonth = months[dateObj.getMonth()];
+  const dateYear = dateObj.getFullYear();
+  const dateNumber = dateObj.getDate();
+  const datePrefixed =
+    dateNumber === 1 || dateNumber === 31
+      ? dateNumber + "st"
+      : dateNumber === 2
+        ? dateNumber + "nd"
+        : dateNumber === 3 || dateNumber === 23
+          ? dateNumber + "rd"
+          : dateNumber + "th";
+
+  return [dateMonth, dateYear, datePrefixed];
+}
+
+const slideIndex = createSlideIndexStore();
+
+export { slideIndex, getData, parseDate };
