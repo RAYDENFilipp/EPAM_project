@@ -8,16 +8,17 @@
 </script>
 
 <style>
-  /* .logged-in::before {
-    background-color: green;
+  .logged-in::before {
+    border: 4px solid green;
     border-radius: 50%;
-    bottom: 2px;
-    box-shadow: 0 0 10px 2px green;
+    bottom: -2.5rem;
+    box-shadow: 0 0 8px 1px green;
     content: "";
-    left: 2px;
+    display: block;
+    left: 1rem;
     position: relative;
-    width: 3px;
-  } */
+    width: 4px;
+  }
 </style>
 
 {#await userPromise then user}

@@ -38,20 +38,20 @@
   <hr />
   <!-- Comments Form -->
   <div class="card my-4">
-    <h5 class="card-header">Leave a Comment:</h5>
-    <div class="card-body">
-      <form>
+    <form>
+      <label for="comment" class="card-header h5 w-100">Leave a Comment:</label>
+      <div class="card-body">
         <div class="form-group">
-          <textarea class="form-control" rows="3" />
+          <textarea id="comment" class="form-control" rows="3" />
         </div>
         <button type="submit" class="btn btn-primary">Submit</button>
-      </form>
-    </div>
+      </div>
+    </form>
   </div>
 
   <!-- Comments section -->
 
-  <div class="media mb-4">
+  <div class="d-flex flex-column mb-4">
     {#each comments as comment}
       <Comment {...comment} />
     {/each}
