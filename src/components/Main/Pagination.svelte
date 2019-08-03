@@ -1,30 +1,38 @@
 <script>
+  import { beforeUpdate } from "svelte";
+  import { getData } from "../../utilities/utilities";
   export let pageCurrent = 1;
-  export let pageEnd = 1;
+  export let pageEnd = false;
+
+  getData(`/posts?_page=${pageCurrent + 1}`).then(data => {
+    pageEnd = data.length < 10;
+  });
 </script>
 
 <style>
   /* your styles go here */
 </style>
 
-<!-- {@debug pageEnd} -->
 <ul class="pagination justify-content-center mb-4">
-  <li class="page-item">
-    <button
-      class:d-none={pageCurrent === 1}
-      type="button"
-      class="btn btn-primary"
-      on:click={() => pageCurrent--}>
-      ← Older
-    </button>
-  </li>
-  <li class="page-item">
-    <button
-      class:d-none={!pageEnd || pageEnd < 10}
-      type="button"
-      class="btn btn-primary"
-      on:click={() => pageCurrent++}>
-      Newer →
-    </button>
-  </li>
+  {#if pageCurrent > 1}
+    <li class="page-item">
+      <button
+        type="button"
+        class="btn btn-primary"
+        on:click={() => pageCurrent--}>
+        ← Older
+      </button>
+    </li>
+  {/if}
+
+  {#if !pageEnd}
+    <li class="page-item">
+      <button
+        type="button"
+        class="btn btn-primary"
+        on:click={() => pageCurrent++}>
+        Newer →
+      </button>
+    </li>
+  {/if}
 </ul>
