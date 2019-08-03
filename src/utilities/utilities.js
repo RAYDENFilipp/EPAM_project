@@ -84,5 +84,7 @@ function parseDate(date) {
 }
 
 const slideIndex = createSlideIndexStore();
+const postObject = writable({});
+const postPicked = writable(false);
 
-export { slideIndex, getData, parseDate };
+export { slideIndex, getData, parseDate, postObject, postPicked };
