@@ -38,7 +38,13 @@
   .carousel {
     background: no-repeat center center scroll;
     background-size: cover;
-    min-height: 250px;
+    height: 250px;
+  }
+
+  @media (max-width: 500px) {
+    .carousel__caption {
+      width: 65%;
+    }
   }
 
   .carousel__caption--transparent {
