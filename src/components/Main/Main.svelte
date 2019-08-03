@@ -1,5 +1,6 @@
 <script>
   import { onMount } from "svelte";
+  import { fade } from 'svelte/transition';
   import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
   import Pagination from "./Pagination.svelte";
@@ -7,17 +8,10 @@
   import Post from "./Post.svelte";
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
-  import { getData } from "../../utilities/utilities";
+  import { getData, postObject, postPicked } from "../../utilities/utilities";
 
   let pageCurrent = 1;
-  let postPicked = false;
-  let postObject;
   $: dataPromise = getData(`/posts?_page=${pageCurrent}`);
-
-  function showPost(event) {
-    postPicked = true;
-    postObject = event.detail;
-  }
 </script>
 
 <style>
@@ -43,13 +37,13 @@
             <p class="h2 text-danger">Status: {posts.status}.</p>
             <p class="h2 text-danger">Reason: {posts.reason}.</p>
           </article>
-        {:else if !postPicked}
+        {:else if !$postPicked}
           <!-- Blog Entries Column -->
           <div class="col-md-8 mt-4">
             {#each posts as post}
-              <PostItem {...post} on:picked={showPost} />
+              <PostItem {...post} />
             {/each}
-            <Pagination bind:pageCurrent pageEnd={posts.length} />
+            <Pagination bind:pageCurrent />
           </div>
           <!-- Sidebar Widgets Column -->
           <div class="col-md-4">
@@ -58,7 +52,7 @@
 
           </div>
         {:else}
-          <Post {...postObject} />
+          <Post {...$postObject} on:click={() => postPicked.set(false)} />
         {/if}
       {:catch error}
         <!-- On error message -->

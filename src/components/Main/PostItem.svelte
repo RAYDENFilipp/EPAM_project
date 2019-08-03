@@ -1,20 +1,26 @@
 <script>
   import { onMount } from "svelte";
-  import { createEventDispatcher } from "svelte";
-  import { getData, parseDate } from "../../utilities/utilities";
+  import {
+    getData,
+    parseDate,
+    postPicked,
+    postObject
+  } from "../../utilities/utilities";
 
   export let id, title, slogan, text, author_id, date, comments;
 
+  const [month, year, datePrefixed] = parseDate(date);
   const userPromise = getData(`/users?id=${author_id}`).then(
     userArray => userArray[0]
   );
 
-  const [month, year, datePrefixed] = parseDate(date);
+  const main = document.querySelector("[data-window='main']");
 
-  const dispatch = createEventDispatcher();
 
   function revealPost() {
-    dispatch("picked", {
+    main.scrollTop = 0;
+    postPicked.set(true);
+    postObject.set({
       id: id,
       title: title,
       slogan: slogan,
@@ -35,9 +41,9 @@
     <div class="card-body">
       <h2 class="card-title">{title}</h2>
       <p class="card-text">{slogan}</p>
-      <a href="#posts/{id}" class="btn btn-primary" on:click={revealPost}>
+      <button class="btn btn-primary" on:click={revealPost}>
         Read More →
-      </a>
+      </button>
     </div>
     <div class="card-footer text-muted">
       Posted on {month} {datePrefixed}, {year} by

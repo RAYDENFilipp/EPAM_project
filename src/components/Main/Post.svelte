@@ -7,11 +7,11 @@
   /* your styles go here */
 </style>
 
-<div class="col-lg-8 mx-auto">
+<div class="col-lg-8 mx-auto mt-2">
   <!-- promise was fulfilled -->
-
+  <button class="btn btn-primary" on:click>← Back</button>
   <!-- Title -->
-  <h1 class="mt-4">{title}</h1>
+  <h1 class="mt-1">{title}</h1>
 
   <!-- Author -->
   {#await authorPromise then author}
