@@ -83,8 +83,27 @@ function parseDate(date) {
   return [dateMonth, dateYear, datePrefixed];
 }
 
+function debounce(fn, ms) {
+  let timer;
+
+  return function(...args) {
+    if (timer) clearTimeout(timer);
+
+    timer = setTimeout(() => fn.apply(this, args), ms);
+  };
+}
+
 const slideIndex = createSlideIndexStore();
 const postObject = writable({});
 const postPicked = writable(false);
+const searchFilter = writable("");
 
-export { slideIndex, getData, parseDate, postObject, postPicked };
+export {
+  slideIndex,
+  getData,
+  parseDate,
+  postObject,
+  postPicked,
+  debounce,
+  searchFilter
+};
