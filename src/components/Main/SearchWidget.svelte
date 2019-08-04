@@ -52,7 +52,7 @@
         type="search"
         id="search"
         class="form-control"
-        placeholder="Name or Lastname or Title"
+        placeholder="Name, Lastname, Title or slogan"
         on:input={debounce(createSearchString, 600)} />
     </div>
   </div>

@@ -29,6 +29,11 @@
   .invisible {
     display: none;
   }
+
+  .failed ~ .search,
+  .pending ~ .search {
+    display: none;
+  }
 </style>
 
 <div data-window="main">
@@ -39,17 +44,19 @@
     <div class="row" id="blog">
       {#await dataPromise}
         <!-- Pending spinner -->
-        <PendingSpinner />
+        <div class="pending col-md-12">
+          <PendingSpinner />
+        </div>
       {:then posts}
         {#if posts.failed}
-          <article class="my-2 mx-auto">
-            <h1 class="text-danger">Can't load the page.</h1>
-            <p class="h2 text-danger">Status: {posts.status}.</p>
-            <p class="h2 text-danger">Reason: {posts.reason}.</p>
+          <article class="failed my-2 mx-auto">
+            <h2 class="text-danger">Can't load the page.</h2>
+            <p class="h3 text-danger">Status: {posts.status}.</p>
+            <p class="h3 text-danger">Reason: {posts.reason}.</p>
           </article>
         {:else if !$postPicked}
           <!-- Blog Entries Column -->
-          <div class="col-md-8 mt-4">
+          <div class="col-lg-8 mt-4">
             {#each posts as post}
               <PostItem {...post} />
             {/each}
@@ -60,17 +67,16 @@
         {/if}
       {:catch error}
         <!-- On error message -->
-        <div class="col-md-12 my-4 ml-5">
-          <h1>Failed at loading data.</h1>
-          <h3 class="text-danger">{error.message}</h3>
-          <h3>Please, reload the page</h3>
-        </div>
+        <article class="failed my-4 mx-auto">
+          <h2 class="text-danger">Failed at loading data.</h2>
+          <p class="h3">{error.message}</p>
+          <p class="h3">It seems the server is...dead</p>
+        </article>
       {/await}
-      <div class:invisible={$postPicked} class="col-md-4">
-
+      <div class:invisible={$postPicked} class="search col-lg-4">
         <SearchWidget />
-
       </div>
+
     </div>
 
   </main>
