@@ -42,6 +42,27 @@ function getData(query) {
     });
 }
 
+/**
+ * put a string query starting with '/'
+ * after which the function will send data
+ * to the server
+ *
+ * @param {String} query
+ * @param {String} [method="GET"]
+ * @param {Object} [body={}]
+ * @returns
+ */
+function sendData(query, method = "GET", body = {}) {
+  return fetch(`http://localhost:3000${query}`, {
+    method: method,
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  }).catch(e => {
+    throw new Error(e);
+  });
+}
 
 /**
  * array of months names to be used in the parseDate()
@@ -108,5 +129,6 @@ export {
   postObject,
   postPicked,
   debounce,
-  searchFilter
+  searchFilter,
+  sendData
 };
