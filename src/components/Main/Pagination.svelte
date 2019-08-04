@@ -5,7 +5,7 @@
   export let pageEnd = false;
 
   getData(`/posts?${$searchFilter}_page=${pageCurrent + 1}`).then(data => {
-    pageEnd = data.length < 10;
+    pageEnd = data.length === 0;
   });
 </script>
 
