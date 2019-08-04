@@ -3,15 +3,15 @@
   import CommentForm from "./CommentForm.svelte";
   import { postObject, postPicked } from "../../utilities/utilities";
 
-  const {
+  let {
     id,
     title,
     slogan,
     text,
     authorPromise,
-    date,
-    comments
+    date
   } = $postObject;
+
 </script>
 
 <div class="col-lg-8 mx-auto mt-2">
@@ -52,8 +52,8 @@
   <!-- Comments section -->
 
   <div class="d-flex flex-column mb-4">
-    {#each comments as comment}
-      <Comment {...comment} />
+    {#each $postObject.comments as comment, index}
+      <Comment {...comment} {index}/>
     {/each}
   </div>
 </div>
