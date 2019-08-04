@@ -42,6 +42,9 @@
   }
 
   @media (max-width: 500px) {
+    .carousel {
+      height: 200px;
+    }
     .carousel__caption {
       width: 65%;
     }
