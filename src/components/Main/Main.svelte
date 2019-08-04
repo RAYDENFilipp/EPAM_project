@@ -1,6 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import { fade } from 'svelte/transition';
+  import { fade } from "svelte/transition";
   import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
   import Pagination from "./Pagination.svelte";
@@ -8,16 +8,26 @@
   import Post from "./Post.svelte";
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
-  import { getData, postObject, postPicked } from "../../utilities/utilities";
+  import {
+    getData,
+    postObject,
+    postPicked,
+    searchFilter
+  } from "../../utilities/utilities";
 
   let pageCurrent = 1;
-  $: dataPromise = getData(`/posts?_page=${pageCurrent}`);
+  let dataPromise;
+  $: dataPromise = getData(`/posts?${$searchFilter}_page=${pageCurrent}`);
 </script>
 
 <style>
   [data-window="main"] {
     height: inherit;
     overflow-y: scroll;
+  }
+
+  .invisible {
+    display: none;
   }
 </style>
 
@@ -45,12 +55,6 @@
             {/each}
             <Pagination bind:pageCurrent />
           </div>
-          <!-- Sidebar Widgets Column -->
-          <div class="col-md-4">
-
-            <SearchWidget />
-
-          </div>
         {:else}
           <Post {...$postObject} on:click={() => postPicked.set(false)} />
         {/if}
@@ -62,7 +66,11 @@
           <h3>Please, reload the page</h3>
         </div>
       {/await}
-      <!-- /.row -->
+      <div class:invisible={$postPicked} class="col-md-4">
+
+        <SearchWidget />
+
+      </div>
     </div>
 
   </main>

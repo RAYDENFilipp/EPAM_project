@@ -1,10 +1,10 @@
 <script>
   import { beforeUpdate } from "svelte";
-  import { getData } from "../../utilities/utilities";
+  import { getData, searchFilter } from "../../utilities/utilities";
   export let pageCurrent = 1;
   export let pageEnd = false;
 
-  getData(`/posts?_page=${pageCurrent + 1}`).then(data => {
+  getData(`/posts?${$searchFilter}_page=${pageCurrent + 1}`).then(data => {
     pageEnd = data.length < 10;
   });
 </script>
