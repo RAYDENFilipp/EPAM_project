@@ -1,12 +1,40 @@
 <script>
-  import { getData, parseDate } from "../../utilities/utilities";
-  export let user_id, comment, date;
+  import {
+    getData,
+    parseDate,
+    sendData,
+    postObject
+  } from "../../utilities/utilities";
+  export let user_id, comment, date, index;
+  // let loggedUserID = 1;
+  // let owner = false;
+  let comments = $postObject.comments;
+  let postId = $postObject.id;
 
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);
-
   const userPromise = getData(`/users?id=${user_id}`).then(
     userArray => userArray[0]
   );
+
+  function deleteComment() {
+    comments.splice(index, 1);
+    sendData(`/posts/${postId}`, "PATCH", { comments: comments })
+      .then(response => {
+        if (response.ok) {
+          postObject.update(n => {
+            n.comments = comments;
+            return n;
+          });
+        } else {
+          alert("Failed at posting the comment");
+        }
+      })
+      .catch(e => {
+        alert(
+          `Failed at deleting the comment.\nEither server might be dead or your connection lost.\nReason: ${e.message}`
+        );
+      });
+  }
 </script>
 
 <style>
@@ -30,7 +58,14 @@
       src={user.avatar}
       alt="Avatar {user_id}" />
     <div class="media-body">
-      <h5 class="mt-0">{user.first_name} {user.last_name}</h5>
+      <div class="d-flex justify-content-between mt-0">
+        <h5>{user.first_name} {user.last_name}</h5>
+        <!-- {#if loggedUserID === user_id || owner} -->
+          <button type="button" class="btn btn-danger" on:click={deleteComment}>
+            <i class="far fa-trash-alt" />
+          </button>
+        <!-- {/if} -->
+      </div>
       <p>{hours}:{minutes}, {month} {datePrefixed}, {year}</p>
       <p>{comment}</p>
     </div>
