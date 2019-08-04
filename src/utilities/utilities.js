@@ -17,7 +17,7 @@ function createSlideIndexStore() {
 
 /**
  * put a string query starting with '/'
- * after whih the function will fetch data
+ * after which the function will fetch data
  * from the server and returns a Promise which when resolved
  * returns a response of data (response is OK) or object with status and reason
  * text to be used as a fallback value; rejects with an error if any happened.
@@ -42,6 +42,7 @@ function getData(query) {
     });
 }
 
+
 /**
  * array of months names to be used in the parseDate()
  */
@@ -64,13 +65,15 @@ const months = [
  *
  *
  * @param {Date} date
- * @returns [dateMonth, dateYear, datePrefixed ]
+ * @returns {month, year, datePrefixed, hours, minutes}
  */
 function parseDate(date) {
   const dateObj = new Date(date);
-  const dateMonth = months[dateObj.getMonth()];
-  const dateYear = dateObj.getFullYear();
+  const month = months[dateObj.getMonth()];
+  const year = dateObj.getFullYear();
   const dateNumber = dateObj.getDate();
+  const hours = dateObj.getHours();
+  const minutes = dateObj.getMinutes();
   const datePrefixed =
     dateNumber === 1 || dateNumber === 31
       ? dateNumber + "st"
@@ -80,7 +83,7 @@ function parseDate(date) {
           ? dateNumber + "rd"
           : dateNumber + "th";
 
-  return [dateMonth, dateYear, datePrefixed];
+  return { month, year, datePrefixed, hours, minutes };
 }
 
 function debounce(fn, ms) {

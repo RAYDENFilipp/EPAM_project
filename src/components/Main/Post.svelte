@@ -1,5 +1,6 @@
 <script>
   import Comment from "./Comment.svelte";
+  import CommentForm from "./CommentForm.svelte";
   export let id, title, slogan, text, authorPromise, date, comments;
 </script>
 
@@ -24,7 +25,9 @@
   <hr />
 
   <!-- Date/Time -->
-  <p>Posted on {date.month} {date.datePrefixed}, {date.year}</p>
+  <p>
+    Posted on {date.month} {date.datePrefixed}, {date.year} {date.hours}:{date.minutes}
+  </p>
 
   <hr />
 
@@ -37,18 +40,7 @@
 
   <hr />
   <!-- Comments Form -->
-  <div class="card my-4">
-    <form>
-      <label for="comment" class="card-header h5 w-100">Leave a Comment:</label>
-      <div class="card-body">
-        <div class="form-group">
-          <textarea id="comment" class="form-control" rows="3" />
-        </div>
-        <button type="submit" class="btn btn-primary">Submit</button>
-      </div>
-    </form>
-  </div>
-
+  <CommentForm postId={id} />
   <!-- Comments section -->
 
   <div class="d-flex flex-column mb-4">

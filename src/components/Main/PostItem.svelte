@@ -9,7 +9,7 @@
 
   export let id, title, slogan, text, author_id, date, comments;
 
-  const [month, year, datePrefixed] = parseDate(date);
+  const {month, year, datePrefixed, hours, minutes} = parseDate(date);
   const userPromise = getData(`/users?id=${author_id}`).then(
     userArray => userArray[0]
   );
@@ -26,7 +26,7 @@
       slogan: slogan,
       text: text,
       authorPromise: userPromise,
-      date: { month: month, year: year, datePrefixed: datePrefixed },
+      date: { month: month, year: year, datePrefixed: datePrefixed, hours: hours, minutes: minutes },
       comments: comments
     });
   }
@@ -46,7 +46,7 @@
       </button>
     </div>
     <div class="card-footer text-muted">
-      Posted on {month} {datePrefixed}, {year} by
+      Posted on {month} {datePrefixed}, {year} {hours}:{minutes} by
       <em>{user.first_name} {user.last_name}</em>
     </div>
   </div>

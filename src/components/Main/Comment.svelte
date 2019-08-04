@@ -1,6 +1,8 @@
 <script>
-  import { getData } from "../../utilities/utilities";
-  export let user_id, comment;
+  import { getData, parseDate } from "../../utilities/utilities";
+  export let user_id, comment, date;
+
+  const { month, year, datePrefixed, hours, minutes } = parseDate(date);
 
   const userPromise = getData(`/users?id=${user_id}`).then(
     userArray => userArray[0]
@@ -29,6 +31,7 @@
       alt="Avatar {user_id}" />
     <div class="media-body">
       <h5 class="mt-0">{user.first_name} {user.last_name}</h5>
+      <p>{hours}:{minutes}, {month} {datePrefixed}, {year}</p>
       <p>{comment}</p>
     </div>
   </section>
