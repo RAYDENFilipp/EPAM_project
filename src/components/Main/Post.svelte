@@ -1,16 +1,24 @@
 <script>
   import Comment from "./Comment.svelte";
   import CommentForm from "./CommentForm.svelte";
-  export let id, title, slogan, text, authorPromise, date, comments;
-</script>
+  import { postObject, postPicked } from "../../utilities/utilities";
 
-<style>
-  /* your styles go here */
-</style>
+  const {
+    id,
+    title,
+    slogan,
+    text,
+    authorPromise,
+    date,
+    comments
+  } = $postObject;
+</script>
 
 <div class="col-lg-8 mx-auto mt-2">
   <!-- promise was fulfilled -->
-  <button class="btn btn-primary" on:click>← Back</button>
+  <button class="btn btn-primary" on:click={() => postPicked.set(false)}>
+    ← Back
+  </button>
   <!-- Title -->
   <h1 class="mt-1">{title}</h1>
 
@@ -40,7 +48,7 @@
 
   <hr />
   <!-- Comments Form -->
-  <CommentForm postId={id} />
+  <CommentForm />
   <!-- Comments section -->
 
   <div class="d-flex flex-column mb-4">

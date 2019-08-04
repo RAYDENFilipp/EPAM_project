@@ -10,7 +10,6 @@
   import SearchWidget from "./SearchWidget.svelte";
   import {
     getData,
-    postObject,
     postPicked,
     searchFilter
   } from "../../utilities/utilities";
@@ -63,7 +62,7 @@
             <Pagination bind:pageCurrent />
           </div>
         {:else}
-          <Post {...$postObject} on:click={() => postPicked.set(false)} />
+          <Post />
         {/if}
       {:catch error}
         <!-- On error message -->
