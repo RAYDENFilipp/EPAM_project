@@ -1,11 +1,11 @@
 <script>
-  import { sendData, formPicked } from "../../utilities/utilities";
+  import { sendData, formPicked, userLoggedIn } from "../../utilities/utilities";
   let validated = false;
 
   function submitPostForm(event) {
     const form = event.target;
     const body = {
-      author_id: 1,
+      author_id: $userLoggedIn,
       title: form.title.value,
       slogan: form.slogan.value,
       text: form.text.value,

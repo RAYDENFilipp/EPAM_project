@@ -1,6 +1,6 @@
 <script>
   import { beforeUpdate, afterUpdate } from "svelte";
-  import { sendData, postObject } from "../../utilities/utilities";
+  import { sendData, postObject, userLoggedIn } from "../../utilities/utilities";
   let textarea = "";
   let comments = $postObject.comments;
   let postId = $postObject.id;
@@ -10,7 +10,7 @@
   function updateComment() {
     let response;
     comments.push({
-      user_id: user_id,
+      user_id: $userLoggedIn,
       comment: textarea,
       date: new Date().toISOString()
     });

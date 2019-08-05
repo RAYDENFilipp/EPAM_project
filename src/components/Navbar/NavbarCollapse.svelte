@@ -1,4 +1,10 @@
 <script>
+  import {
+    submitType,
+    deleteCookie,
+    userLoggedIn,
+    sendData
+  } from "../../utilities/utilities";
   export let collapsed = true;
 
   let links = [
@@ -71,15 +77,29 @@
       </li>
     {/each}
   </ul>
-  <!-- <form class="form-inline mt-2 mt-md-0 mr-lg-2">
-    <input
-      class="form-control mr-sm-2"
-      type="text"
-      placeholder="Search"
-      aria-label="Search" />
-    <input
-      class="btn btn-outline-success my-2 my-sm-0"
-      type="submit"
-      value="Search" />
-  </form> -->
+  <div class="form-inline mt-2 mt-md-0 mr-lg-2">
+    {#if $submitType === 'Sign Out'}
+      <button
+        class="btn btn-outline-danger my-2 my-sm-0"
+        on:click={() => {
+          deleteCookie('user_id', -5);
+          submitType.set('');
+          sendData(`/users/${$userLoggedIn}`, 'PATCH', { logged_in: false });
+          userLoggedIn.set(null);
+        }}>
+        Sign out
+      </button>
+    {:else}
+      <button
+        class="btn btn-outline-light mr-sm-2"
+        on:click={() => submitType.set('Sign In')}>
+        Sign In
+      </button>
+      <button
+        class="btn btn-outline-light my-2 my-sm-0"
+        on:click={() => submitType.set('Sign Up')}>
+        Sign Up
+      </button>
+    {/if}
+  </div>
 </div>

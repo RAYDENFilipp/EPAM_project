@@ -54,6 +54,65 @@ function getData(query) {
     });
 }
 
+function getUser(email, password) {
+  return fetch("http://localhost:3000/users")
+    .then(response => response.json())
+    .then(data => {
+      const user = data.find(record => {
+        return record.email === email && record.password === password;
+      });
+      return user;
+    })
+    .catch(e => {
+      throw new Error(e);
+    });
+}
+
+/**
+ *
+ * @param {String} name
+ * @param {String} value
+ * @param {Number} maxAge
+ */
+function createCookie(name, value, maxAge) {
+  document.cookie = `${encodeURIComponent(name)}=${encodeURIComponent(
+    value
+  )}; max-age=${maxAge}`;
+}
+
+/**
+ *
+ * @param {String} name
+ * @param {Number} maxAge
+ */
+function deleteCookie(name, maxAge) {
+  document.cookie = `${encodeURIComponent(name)}=; max-age=${maxAge}`;
+}
+
+/**
+ * Here we look for the first occurence of property name we are trying
+ * to find a value of.
+ * Then, if found, we copy substring of the value assigned to the property
+ * and return it.
+ *
+ * @param {String} propertyName
+ * @returns cookie value
+ */
+function getCookieFor(propertyName) {
+  const cookies = document.cookie;
+  const cookiesDecoded = decodeURIComponent(cookies);
+  const position = cookiesDecoded.indexOf(propertyName);
+
+  // ~(-1) = 0
+  if (~position) {
+    const start = position + propertyName.length + 1;
+    let end = cookiesDecoded.indexOf(";", start);
+    if (!~end) end = cookiesDecoded.length;
+
+    return cookiesDecoded.substring(start, end);
+  }
+}
+
 /**
  * put a string query starting with '/'
  * after which the function will send data
@@ -134,6 +193,8 @@ const pageCurrent = createPageCounterStore();
 const postObject = writable({});
 const postPicked = writable(false);
 const formPicked = writable(false);
+const userLoggedIn = writable(null);
+const submitType = writable("");
 const searchFilter = writable("");
 
 export {
@@ -146,5 +207,11 @@ export {
   searchFilter,
   sendData,
   pageCurrent,
-  formPicked
+  formPicked,
+  submitType,
+  userLoggedIn,
+  getUser,
+  createCookie,
+  deleteCookie,
+  getCookieFor
 };

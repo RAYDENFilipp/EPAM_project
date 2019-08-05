@@ -1,17 +1,13 @@
 <script>
   import Comment from "./Comment.svelte";
   import CommentForm from "./CommentForm.svelte";
-  import { postObject, postPicked } from "../../utilities/utilities";
+  import {
+    postObject,
+    postPicked,
+    userLoggedIn
+  } from "../../utilities/utilities";
 
-  let {
-    id,
-    title,
-    slogan,
-    text,
-    authorPromise,
-    date
-  } = $postObject;
-
+  let { id, title, slogan, text, authorPromise, date } = $postObject;
 </script>
 
 <div class="col-lg-8 mx-auto mt-2">
@@ -28,32 +24,34 @@
       by
       <em>{author.first_name} {author.last_name}</em>
     </p>
+
+    <hr />
+
+    <!-- Date/Time -->
+    <p>
+      Posted on {date.month} {date.datePrefixed}, {date.year} {date.hours}:{date.minutes}
+    </p>
+
+    <hr />
+
+    <hr />
+
+    <!-- Post Content -->
+    <p class="lead">{slogan}</p>
+
+    <p>{text}</p>
+
+    <hr />
+    <!-- Comments Form -->
+    {#if $userLoggedIn}
+      <CommentForm />
+    {/if}
+    <!-- Comments section -->
+
+    <div class="d-flex flex-column mb-4">
+      {#each $postObject.comments as comment, index}
+        <Comment {...comment} {index} authorId={author.id} />
+      {/each}
+    </div>
   {/await}
-
-  <hr />
-
-  <!-- Date/Time -->
-  <p>
-    Posted on {date.month} {date.datePrefixed}, {date.year} {date.hours}:{date.minutes}
-  </p>
-
-  <hr />
-
-  <hr />
-
-  <!-- Post Content -->
-  <p class="lead">{slogan}</p>
-
-  <p>{text}</p>
-
-  <hr />
-  <!-- Comments Form -->
-  <CommentForm />
-  <!-- Comments section -->
-
-  <div class="d-flex flex-column mb-4">
-    {#each $postObject.comments as comment, index}
-      <Comment {...comment} {index}/>
-    {/each}
-  </div>
 </div>

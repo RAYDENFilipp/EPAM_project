@@ -6,16 +6,15 @@
     postObject,
     sendData,
     pageCurrent,
-    searchFilter
+    searchFilter,
+    userLoggedIn
   } from "../../utilities/utilities";
   import { afterUpdate } from "svelte";
   let user_id = "";
 
   export let id, title, slogan, text, author_id, date, comments;
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);
-  const userPromise = getData(`/users?id=${author_id}`).then(
-    userArray => userArray[0]
-  );
+  const userPromise = getData(`/users/${author_id}`);
   const main = document.querySelector("[data-window='main']");
   let deleted = false;
 
@@ -68,7 +67,7 @@
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-start mt-0">
         <h2 class="card-title">{title}</h2>
-        {#if user_id && author_id === user_id}
+        {#if author_id === $userLoggedIn}
           <button type="button" class="btn btn-danger" on:click={deletePost}>
             <i class="far fa-trash-alt" />
           </button>

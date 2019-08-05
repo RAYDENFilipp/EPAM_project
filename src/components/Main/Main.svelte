@@ -14,10 +14,9 @@
     postPicked,
     searchFilter,
     pageCurrent,
-    formPicked
+    formPicked,
+    userLoggedIn
   } from "../../utilities/utilities";
-
-  afterUpdate(() => console.log("after updated"));
 
   let dataPromise;
   let main;
@@ -63,12 +62,14 @@
         {:else if !$postPicked && !$formPicked}
           <!-- Blog Entries Column -->
           <div class="col-lg-8 mt-4">
-            <button
-              type="button"
-              class="btn btn-success btn-block my-1"
-              on:click={() => formPicked.set(true)}>
-              Add new post
-            </button>
+            {#if $userLoggedIn}
+              <button
+                type="button"
+                class="btn btn-success btn-block my-1"
+                on:click={() => formPicked.set(true)}>
+                Add new post
+              </button>
+            {/if}
             {#each posts as post}
               <PostItem {...post} />
             {/each}
