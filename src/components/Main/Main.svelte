@@ -9,18 +9,21 @@
   import PostCreateForm from "./PostCreateForm.svelte";
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
+  import SortWidget from "./SortWidget.svelte";
   import {
     getData,
     postPicked,
     searchFilter,
     pageCurrent,
     formPicked,
-    userLoggedIn
+    userLoggedIn,
+    sortDateFilter
   } from "../../utilities/utilities";
 
-  let dataPromise;
   let main;
-  $: dataPromise = getData(`/posts?${$searchFilter}_page=${$pageCurrent}`);
+  $: dataPromise = getData(
+    `/posts?${$searchFilter}${$sortDateFilter}_page=${$pageCurrent}`
+  );
 
   afterUpdate(() => (main.scrollTop = 0));
 </script>
@@ -47,6 +50,9 @@
     <Imageslider />
 
     <div class="row" id="blog">
+      <div class:invisible={$postPicked || $formPicked} class="col-lg-8 mt-4">
+        <SortWidget />
+      </div>
       {#await dataPromise}
         <!-- Pending spinner -->
         <div class="pending col-md-12">
@@ -65,7 +71,7 @@
             {#if $userLoggedIn}
               <button
                 type="button"
-                class="btn btn-success btn-block my-1"
+                class="btn btn-success btn-block btn-lg mb-2"
                 on:click={() => formPicked.set(true)}>
                 Add new post
               </button>

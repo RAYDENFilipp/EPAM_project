@@ -76,13 +76,13 @@
     </div>
   </div>
   <div class="form-inline row justify-content-end">
-    <div class="col-md-1 px-md-0">
+    <div class="col-md-2 px-md-0">
       <button
         class="btn btn-primary btn-block"
         type="submit"
         on:click|once={() => (validated = true)}>Post</button>
     </div>
-    <div class="col-md-1 px-md-0">
+    <div class="col-md-2 px-md-0">
       <button class="btn btn-secondary btn-block" type="reset">Reset</button>
     </div>
     <div class="col-md-2 pl-md-0">

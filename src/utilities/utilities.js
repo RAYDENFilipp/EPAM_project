@@ -196,6 +196,7 @@ const formPicked = writable(false);
 const userLoggedIn = writable(null);
 const submitType = writable("");
 const searchFilter = writable("");
+const sortDateFilter = writable("");
 
 export {
   slideIndex,
@@ -213,5 +214,6 @@ export {
   getUser,
   createCookie,
   deleteCookie,
-  getCookieFor
+  getCookieFor,
+  sortDateFilter
 };
