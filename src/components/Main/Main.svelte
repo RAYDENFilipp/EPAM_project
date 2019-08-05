@@ -1,5 +1,5 @@
 <script>
-  import { onMount } from "svelte";
+  import { afterUpdate } from "svelte";
   import { fade } from "svelte/transition";
   import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
@@ -8,15 +8,14 @@
   import Post from "./Post.svelte";
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
-  import {
-    getData,
-    postPicked,
-    searchFilter
-  } from "../../utilities/utilities";
+  import { getData, postPicked, searchFilter } from "../../utilities/utilities";
 
   let pageCurrent = 1;
   let dataPromise;
+  let main;
   $: dataPromise = getData(`/posts?${$searchFilter}_page=${pageCurrent}`);
+
+  afterUpdate(() => (main.scrollTop = 0));
 </script>
 
 <style>
@@ -35,7 +34,7 @@
   }
 </style>
 
-<div data-window="main">
+<div data-window="main" bind:this={main}>
   <main class="container">
 
     <Imageslider />

@@ -18,7 +18,6 @@
 
 
   function revealPost() {
-    main.scrollTop = 0;
     postPicked.set(true);
     postObject.set({
       id: id,
