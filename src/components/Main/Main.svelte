@@ -6,14 +6,22 @@
   import Pagination from "./Pagination.svelte";
   import PendingSpinner from "./PendingSpinner.svelte";
   import Post from "./Post.svelte";
+  import PostCreateForm from "./PostCreateForm.svelte";
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
-  import { getData, postPicked, searchFilter } from "../../utilities/utilities";
+  import {
+    getData,
+    postPicked,
+    searchFilter,
+    pageCurrent,
+    formPicked
+  } from "../../utilities/utilities";
 
-  let pageCurrent = 1;
+  afterUpdate(() => console.log("after updated"));
+
   let dataPromise;
   let main;
-  $: dataPromise = getData(`/posts?${$searchFilter}_page=${pageCurrent}`);
+  $: dataPromise = getData(`/posts?${$searchFilter}_page=${$pageCurrent}`);
 
   afterUpdate(() => (main.scrollTop = 0));
 </script>
@@ -52,14 +60,22 @@
             <p class="h3 text-danger">Status: {posts.status}.</p>
             <p class="h3 text-danger">Reason: {posts.reason}.</p>
           </article>
-        {:else if !$postPicked}
+        {:else if !$postPicked && !$formPicked}
           <!-- Blog Entries Column -->
           <div class="col-lg-8 mt-4">
+            <button
+              type="button"
+              class="btn btn-success btn-block my-1"
+              on:click={() => formPicked.set(true)}>
+              Add new post
+            </button>
             {#each posts as post}
               <PostItem {...post} />
             {/each}
-            <Pagination bind:pageCurrent />
+            <Pagination />
           </div>
+        {:else if $formPicked}
+          <PostCreateForm />
         {:else}
           <Post />
         {/if}
@@ -71,7 +87,7 @@
           <p class="h3">It seems the server is...dead</p>
         </article>
       {/await}
-      <div class:invisible={$postPicked} class="search col-lg-4">
+      <div class:invisible={$postPicked || $formPicked} class="search col-lg-4">
         <SearchWidget />
       </div>
 
