@@ -15,6 +15,18 @@ function createSlideIndexStore() {
   };
 }
 
+/** This store is used to keep track of the current page number
+ */
+function createPageCounterStore() {
+  const { subscribe, update, set } = writable(1);
+  return {
+    subscribe,
+    increment: () => update(n => ++n),
+    decrement: () => update(n => --n),
+    set
+  };
+}
+
 /**
  * put a string query starting with '/'
  * after which the function will fetch data
@@ -118,8 +130,10 @@ function debounce(fn, ms) {
 }
 
 const slideIndex = createSlideIndexStore();
+const pageCurrent = createPageCounterStore();
 const postObject = writable({});
 const postPicked = writable(false);
+const formPicked = writable(false);
 const searchFilter = writable("");
 
 export {
@@ -130,5 +144,7 @@ export {
   postPicked,
   debounce,
   searchFilter,
-  sendData
+  sendData,
+  pageCurrent,
+  formPicked
 };
