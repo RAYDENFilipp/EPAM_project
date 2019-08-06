@@ -3,7 +3,7 @@
   import { searchFilter, sortDateFilter } from "../../utilities/stores";
 
   let checked = false;
-
+// sets sort order on the database for Main component
   $: if (checked) {
     sortDateFilter.set("_sort=date&_order=asc&");
   } else {

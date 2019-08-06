@@ -28,7 +28,7 @@
     }
   ];
 
-  /** with this 'reactive declaration' we can handle change of store's value
+  /** with this 'reactive declaration' we can handle change of the store's value
    * and draw a respective slider
    * */
   $: itemtoDraw = images[$slideIndex];
@@ -60,12 +60,14 @@
   {#each images as { id, src, caption, color }}
     <!-- one of the ways we can render only one slider to the DOM instead of three -->
     {#if $slideIndex === id}
+    <!-- Slider with picture inside -->
       <div
         class:active={id === $slideIndex}
         class="carousel carousel-item d-flex flex-column justify-content-center
         align-items-center"
         style="background-image: url({src});"
         transition:fade>
+        <!-- Slider's caption -->
         <section
           class="carousel__caption carousel__caption--transparent {color}
           bg-dark px-2 mx-auto my-5">

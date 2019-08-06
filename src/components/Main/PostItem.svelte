@@ -14,8 +14,10 @@
 
   export let id, title, slogan, text, author_id, date, comments;
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);
+  // get author's info
   const userPromise = getData(`/users/${author_id}`);
-  const main = document.querySelector("[data-window='main']");
+
+  // used to hide a deleted post visually until next refresh from the database
   let deleted = false;
 
   function revealPost() {
@@ -67,6 +69,7 @@
     <div class="card-body">
       <div class="d-flex justify-content-between align-items-start mt-0">
         <h2 class="card-title">{title}</h2>
+        <!-- only author of this post can delete it -->
         {#if author_id === $userLoggedIn}
           <button type="button" class="btn btn-danger" on:click={deletePost}>
             <i class="far fa-trash-alt" />

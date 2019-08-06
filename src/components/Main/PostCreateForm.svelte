@@ -2,6 +2,7 @@
   import { sendData } from "../../utilities/helperFunctions";
   import { formPicked, userLoggedIn } from "../../utilities/stores";
 
+// used for bootstrap's form's validation highlight
   let validated = false;
 
   function submitPostForm(event) {

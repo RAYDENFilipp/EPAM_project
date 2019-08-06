@@ -7,10 +7,13 @@
   import { postObject, userLoggedIn } from "../../utilities/stores";
 
   export let user_id, comment, date, index, authorId;
+
+  // derived comments and postId from the store
   let comments = $postObject.comments;
   let postId = $postObject.id;
 
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);
+  // here we get all teh users to fetch their avatars, names etc.
   const userPromise = getData(`/users/${user_id}`);
 
   function deleteComment() {
@@ -18,12 +21,13 @@
     sendData(`/posts/${postId}`, "PATCH", { comments: comments })
       .then(response => {
         if (response.ok) {
+          // to trigger reactive rerender we should update our store
           postObject.update(n => {
             n.comments = comments;
             return n;
           });
         } else {
-          alert("Failed at posting the comment");
+          alert("Failed at deleting the comment");
         }
       })
       .catch(e => {
@@ -35,6 +39,7 @@
 </script>
 
 <style>
+/* green circle near user's avatars that are online */
   .logged-in::before {
     border: 4px solid green;
     border-radius: 50%;
@@ -57,6 +62,7 @@
     <div class="media-body">
       <div class="d-flex justify-content-between mt-0">
         <h5>{user.first_name} {user.last_name}</h5>
+        <!-- only comment author and post owner can delete comments -->
         {#if $userLoggedIn === user_id || authorId === $userLoggedIn}
           <button type="button" class="btn btn-danger" on:click={deleteComment}>
             <i class="far fa-trash-alt" />

@@ -1,9 +1,6 @@
 <script>
   import { onMount } from "svelte";
-  import {
-    submitType,
-    userLoggedIn
-  } from "../../utilities/stores";
+  import { submitType, userLoggedIn } from "../../utilities/stores";
   import {
     sendData,
     getUser,
@@ -12,6 +9,9 @@
   } from "../../utilities/helperFunctions";
   let validated = false;
 
+  /* Here we check if there is any cookie in the browser and if so
+we store that user_id in our store, userLoggedIn.
+*/
   onMount(() => {
     if (getCookieFor("user_id")) {
       const savedId = getCookieFor("user_id");
@@ -20,29 +20,41 @@
     }
   });
 
+  /* Submit function works in two different ways, on 'Sign In' and 'Sign Out.
+The main difference between the two is that in the first case we check for a user email and password [1] in the database and get user's id into the store [2] on success. After that we update the databese that the user is online [3].
+Finally, we change the submitType store to switch the login buttons and create a cookie. [4]
+If Signing in hasn't passed the check [1], we inform the user about that[5].
+Otherwise, msitake might be connected to server issues itself [6].
+
+In the second case we check the email against the database first to make sure
+we wouldn't create the very same user again [7] and if succesful we send
+the request to the server and process it response in similar way as during Sign In [8].
+If any failure happens, the steps are similar [9]
+
+*/
   function submitLogin() {
     const form = event.target;
     const email = form.email.value;
     const password = form.password.value;
 
     if ($submitType === "Sign In") {
-      getUser(email, password, userLoggedIn)
+      getUser(email, password, userLoggedIn) //[1]
         .then(result => {
           if (result) {
-            userLoggedIn.set(parseInt(result.id, 10));
+            userLoggedIn.set(parseInt(result.id, 10)); //[2]
             sendData(`/users/${$userLoggedIn}`, "PATCH", {
-              logged_in: true
+              logged_in: true //[3]
             });
             submitType.set("Sign Out");
             alert("Signing In Successful");
-            createCookie("user_id", $userLoggedIn, 3600);
+            createCookie("user_id", $userLoggedIn, 3600); //[4]
           } else {
-            alert("Password and/or email are wrong");
+            alert("Password and/or email are wrong"); //[5]
           }
         })
         .catch(e => {
           alert(
-            `Failed at Signin in.\nEither server might be dead or your connection lost.\nReason: ${e.message}`
+            `Failed at Signin in.\nEither server might be dead or your connection lost.\nReason: ${e.message}` //[6]
           );
         });
     } else if ($submitType === "Sign Up") {
@@ -56,24 +68,26 @@
         logged_in: true
       };
       getUser(email, password, userLoggedIn).then(result => {
+        //[7]
         if (result) {
           alert("This user exists already");
         } else {
           sendData(`/users`, "POST", body)
             .then(response => {
               if (response.ok) {
-                alert("Success");
+                alert("Success"); //[8]
                 submitType.set("Sign Out");
                 return response.json();
               } else {
-                alert("Failed at posting.");
+                alert("Failed at posting."); //[9]
               }
             })
             .then(data => {
-              userLoggedIn.set(parseInt(data.id, 10));
+              userLoggedIn.set(parseInt(data.id, 10)); //[8]
               createCookie("user_id", $userLoggedIn, 3600);
             })
             .catch(e => {
+              //[9]
               alert(
                 `Failed at Signin up.\nEither server might be dead or your connection lost.\nReason: ${e.message}`
               );
@@ -104,6 +118,7 @@
   }
 </style>
 
+<!-- Conditional render of different forms -->
 {#if $submitType === 'Sign Up' || $submitType === 'Sign In'}
   <form
     class:was-validated={validated}

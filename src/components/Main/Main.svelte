@@ -19,11 +19,16 @@
     sortDateFilter
   } from "../../utilities/stores";
 
+  // used to bind main HTML element
   let main;
+  // reactive declaration for fetching posts. Refreshes anytime any of inserted stores change
   $: dataPromise = getData(
     `/posts?${$searchFilter}${$sortDateFilter}_page=${$pageCurrent}`
   );
 
+/* everytime our main window updates, i.e. we visit post, we slide pages,
+or main element scrolls up
+*/
   afterUpdate(() => (main.scrollTop = 0));
 </script>
 
@@ -53,12 +58,13 @@
         <SortWidget />
       </div>
       {#await dataPromise}
-        <!-- Pending spinner -->
+        <!-- Pending spinner wile data loads-->
         <div class="pending col-md-12">
           <PendingSpinner />
         </div>
       {:then posts}
         {#if posts.failed}
+        <!-- server is online but adress is wrong/changed -->
           <article class="failed my-2 mx-auto">
             <h2 class="text-danger">Can't load the page.</h2>
             <p class="h3 text-danger">Status: {posts.status}.</p>
@@ -67,6 +73,7 @@
         {:else if !$postPicked && !$formPicked}
           <!-- Blog Entries Column -->
           <div class="col-lg-8 mt-4">
+          <!-- only logged in users can post -->
             {#if $userLoggedIn}
               <button
                 type="button"
@@ -85,6 +92,7 @@
         {:else}
           <Post />
         {/if}
+        <!-- if server is down -->
       {:catch error}
         <!-- On error message -->
         <article class="failed my-4 mx-auto">

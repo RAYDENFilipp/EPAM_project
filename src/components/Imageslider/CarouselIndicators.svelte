@@ -4,6 +4,7 @@
   let imageIndecies = [0, 1, 2];
 </script>
 
+<!-- Lower carousel indicators -->
 <ol class="carousel-indicators">
   {#each imageIndecies as index}
     <li

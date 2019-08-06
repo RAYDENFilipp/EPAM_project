@@ -26,7 +26,7 @@
 </style>
 
 <div id="about" class="w-100 pt-2">
-  <article class="col-sm-8 my-2 mx-auto">
+  <article class="col-sm-8 my-5 mx-auto">
     <h2 class="text-center">About</h2>
     <section>
       <h3>Sub-header 1</h3>

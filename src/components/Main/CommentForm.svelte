@@ -8,7 +8,6 @@
   const main = document.querySelector("[data-window='main']");
 
   function updateComment() {
-    let response;
     comments.push({
       user_id: $userLoggedIn,
       comment: textarea,
@@ -17,16 +16,17 @@
     sendData(`/posts/${postId}`, "PATCH", { comments: comments })
       .then(response => {
         if (response.ok) {
+          // to trigger rerender we need to update the store
           postObject.update(n => {
             n.comments = comments;
             return n;
           });
-        } else {
+        } else { //if update operation was unsuccessful
           alert("Failed at posting the comment");
         }
       })
       .catch(e => {
-        alert(
+        alert( //id the server is down
           `Failed at posting the comment.\nEither server might be dead or your connection lost.\nReason: ${e.message}`
         );
       });

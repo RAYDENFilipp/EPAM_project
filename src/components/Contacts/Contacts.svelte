@@ -7,7 +7,7 @@
 
 <div class="container">
   <article class="d-flex flex-column justify-content-around align-items-center">
-
+<!-- Contacts info -->
     <section class="col-lg-6 pt-5 w-50">
       <h2 class="text-uppercase text-center mb-4">Find us</h2>
       <p class="h5 mb-0">

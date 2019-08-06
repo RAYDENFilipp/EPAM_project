@@ -8,7 +8,7 @@
     { active: false, href: "#about", text: "About" },
     { active: false, href: "#contacts", text: "Contacts" }
   ];
-
+  // links get highlighted on select
   function handleClick(active, href, e) {
     if (!active) {
       links = links.map(link => {
@@ -17,7 +17,7 @@
         return link;
       });
     }
-
+    // used for selective rendering on the App component
     pagePicked.set(href);
   }
 </script>
@@ -49,7 +49,9 @@
     {/each}
   </ul>
   <div class="form-inline mt-2 mt-md-0 mr-lg-2">
+    <!-- selective rendering of login buttons depending on wheter user logged in or not -->
     {#if $submitType === 'Sign Out'}
+      <!-- clears the cookie and the stores -->
       <button
         class="btn btn-outline-danger my-2 my-sm-0"
         on:click={() => {
@@ -61,11 +63,13 @@
         Sign out
       </button>
     {:else}
+      <!-- opens a 'Sign In' modal -->
       <button
         class="btn btn-outline-light mr-sm-2"
         on:click={() => submitType.set('Sign In')}>
         Sign In
       </button>
+      <!-- opens a 'Sign Up' modal -->
       <button
         class="btn btn-outline-light my-2 my-sm-0"
         on:click={() => submitType.set('Sign Up')}>

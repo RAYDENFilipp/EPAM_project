@@ -7,7 +7,7 @@
 
   let autoSlideInterval;
 
-  /** In case If user's frequency of clicking might interfere with
+  /** In case If user's frequency of clicking interferes with
    * the interval we clear the interval first
    */
   beforeUpdate(() => {
@@ -19,7 +19,7 @@
     autoSlideInterval = setInterval(() => {
       slideIndex.increment();
     }, 7000);
-    // when component is unmounted (onDestroy event)
+    // when component is unmounted (onDestroy event) we clear the interval
     return () => clearInterval(autoSlideInterval);
   });
 </script>

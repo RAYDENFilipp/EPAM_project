@@ -4,6 +4,7 @@
   import { searchFilter, pageCurrent } from "../../utilities/stores";
   export let pageEnd = false;
 
+// prefetch of the next page to see if that page is empty and if so, there is no need to have a button to there
   getData(`/posts?${$searchFilter}_page=${$pageCurrent + 1}`).then(data => {
     pageEnd = data.length === 0;
   });
