@@ -49,7 +49,7 @@
     <Imageslider />
 
     <div class="row" id="blog">
-      <div class:invisible={$postPicked || $formPicked} class="col-lg-8 mt-4">
+      <div class:invisible={$postPicked || $formPicked} class="col-lg-12 mt-4">
         <SortWidget />
       </div>
       {#await dataPromise}

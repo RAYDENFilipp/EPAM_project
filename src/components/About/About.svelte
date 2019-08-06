@@ -25,7 +25,7 @@
   }
 </style>
 
-<div id="about" class="row w-100">
+<div id="about" class="w-100 pt-2">
   <article class="col-sm-8 my-2 mx-auto">
     <h2 class="text-center">About</h2>
     <section>
@@ -61,7 +61,7 @@
     </section>
     <section>
       <h3>Sub-header 3</h3>
-      <div class="d-flex flex-lg-row flex-column align-items-center">
+      <div class="d-flex flex-lg-row flex-column align-items-center mx-auto">
         <img class="col mt-2" src={img1} alt="cabins" />
         <img class="col mt-2" src={img2} alt="space" />
         <img class="col mt-2" src={img3} alt="tree" />
