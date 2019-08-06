@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "../../utilities/utilities";
+  import { slideIndex } from "../../utilities/stores";
 
   let imageIndecies = [0, 1, 2];
 </script>

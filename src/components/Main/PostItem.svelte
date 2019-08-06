@@ -2,15 +2,15 @@
   import {
     getData,
     parseDate,
+    sendData
+  } from "../../utilities/helperFunctions";
+  import {
     postPicked,
     postObject,
-    sendData,
     pageCurrent,
     searchFilter,
     userLoggedIn
-  } from "../../utilities/utilities";
-  import { afterUpdate } from "svelte";
-  let user_id = "";
+  } from "../../utilities/stores";
 
   export let id, title, slogan, text, author_id, date, comments;
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);

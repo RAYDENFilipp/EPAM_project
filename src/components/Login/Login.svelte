@@ -2,12 +2,14 @@
   import { onMount } from "svelte";
   import {
     submitType,
+    userLoggedIn
+  } from "../../utilities/stores";
+  import {
     sendData,
-    userLoggedIn,
     getUser,
     createCookie,
     getCookieFor
-  } from "../../utilities/utilities";
+  } from "../../utilities/helperFunctions";
   let validated = false;
 
   onMount(() => {

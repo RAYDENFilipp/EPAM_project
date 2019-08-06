@@ -1,14 +1,9 @@
 <script>
-  import {
-    getData,
-    debounce,
-    searchFilter,
-    sortDateFilter
-  } from "../../utilities/utilities";
+  import { getData, debounce } from "../../utilities/helperFunctions";
+  import { searchFilter, sortDateFilter } from "../../utilities/stores";
 
   let checked = false;
-  let users;
-  let posts;
+
   $: if (checked) {
     sortDateFilter.set("_sort=date&_order=asc&");
   } else {

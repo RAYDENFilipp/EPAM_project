@@ -9,15 +9,15 @@
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
   import SortWidget from "./SortWidget.svelte";
+  import { getData } from "../../utilities/helperFunctions";
   import {
-    getData,
     postPicked,
     searchFilter,
     pageCurrent,
     formPicked,
     userLoggedIn,
     sortDateFilter
-  } from "../../utilities/utilities";
+  } from "../../utilities/stores";
 
   let main;
   $: dataPromise = getData(

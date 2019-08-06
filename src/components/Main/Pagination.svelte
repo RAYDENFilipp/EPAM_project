@@ -1,10 +1,7 @@
 <script>
   import { beforeUpdate } from "svelte";
-  import {
-    getData,
-    searchFilter,
-    pageCurrent
-  } from "../../utilities/utilities";
+  import { getData } from "../../utilities/helperFunctions";
+  import { searchFilter, pageCurrent } from "../../utilities/stores";
   export let pageEnd = false;
 
   getData(`/posts?${$searchFilter}_page=${$pageCurrent + 1}`).then(data => {
@@ -12,17 +9,15 @@
   });
 </script>
 
-<style>
-  /* your styles go here */
-</style>
-
 <ul class="pagination justify-content-center mb-4">
   {#if $pageCurrent > 1}
     <li class="page-item">
       <button
         type="button"
         class="btn btn-primary"
-        on:click={pageCurrent.decrement}>← Older</button>
+        on:click={pageCurrent.decrement}>
+        ← Older
+      </button>
     </li>
   {/if}
 
@@ -31,7 +26,9 @@
       <button
         type="button"
         class="btn btn-primary"
-        on:click={pageCurrent.increment}>Newer →</button>
+        on:click={pageCurrent.increment}>
+        Newer →
+      </button>
     </li>
   {/if}
 </ul>

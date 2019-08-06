@@ -1,13 +1,8 @@
 <script>
   import NavbarCollapse from "./NavbarCollapse.svelte";
-  let body;
 
   // used to control behaviour of the navbar-toggler
   let collapse = true;
-
-  /** When component is first rendered to the DOM, we have to
-   * set the body's padding-top to compensate fixed navbarHeight height
-   */
 </script>
 
 <style>

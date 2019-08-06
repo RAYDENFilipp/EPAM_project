@@ -1,6 +1,6 @@
 <script>
-  import { beforeUpdate, afterUpdate } from "svelte";
-  import { sendData, postObject, userLoggedIn } from "../../utilities/utilities";
+  import { sendData } from "../../utilities/helperFunctions";
+  import { postObject, userLoggedIn } from "../../utilities/stores";
   let textarea = "";
   let comments = $postObject.comments;
   let postId = $postObject.id;
@@ -34,10 +34,6 @@
     main.scrollTo(0, main.scrollHeight);
   }
 </script>
-
-<style>
-  /* your styles go here */
-</style>
 
 <div class="card my-4">
   <form>

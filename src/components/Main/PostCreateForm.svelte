@@ -1,5 +1,7 @@
 <script>
-  import { sendData, formPicked, userLoggedIn } from "../../utilities/utilities";
+  import { sendData } from "../../utilities/helperFunctions";
+  import { formPicked, userLoggedIn } from "../../utilities/stores";
+
   let validated = false;
 
   function submitPostForm(event) {
@@ -80,7 +82,9 @@
       <button
         class="btn btn-primary btn-block"
         type="submit"
-        on:click|once={() => (validated = true)}>Post</button>
+        on:click|once={() => (validated = true)}>
+        Post
+      </button>
     </div>
     <div class="col-md-2 px-md-0">
       <button class="btn btn-secondary btn-block" type="reset">Reset</button>
@@ -88,7 +92,9 @@
     <div class="col-md-2 pl-md-0">
       <button
         class="btn btn-danger btn-block"
-        on:click={() => (formPicked.set(false))}>Cancel</button>
+        on:click={() => formPicked.set(false)}>
+        Cancel
+      </button>
     </div>
   </div>
 </form>

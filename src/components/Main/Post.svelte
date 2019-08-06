@@ -1,11 +1,7 @@
 <script>
   import Comment from "./Comment.svelte";
   import CommentForm from "./CommentForm.svelte";
-  import {
-    postObject,
-    postPicked,
-    userLoggedIn
-  } from "../../utilities/utilities";
+  import { postObject, postPicked, userLoggedIn } from "../../utilities/stores";
 
   let { id, title, slogan, text, authorPromise, date } = $postObject;
 </script>

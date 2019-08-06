@@ -1,5 +1,5 @@
 <script>
-  import { slideIndex } from "../../utilities/utilities";
+  import { slideIndex } from "../../utilities/stores";
   import { onMount, beforeUpdate } from "svelte";
   import CarouselIndicators from "./CarouselIndicators.svelte";
   import CarouselSlides from "./CarouselSlides.svelte";
@@ -24,13 +24,7 @@
   });
 </script>
 
-<style>
-
-</style>
-<header
-  id="home"
-  class=" carousel slide h-25 pt-2"
-  data-ride="carousel">
+<header id="home" class=" carousel slide h-25 pt-2" data-ride="carousel">
   <CarouselIndicators />
   <CarouselSlides />
   <CarouselButton

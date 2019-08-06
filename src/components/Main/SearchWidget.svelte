@@ -1,8 +1,7 @@
 <script>
-  import { getData, debounce, searchFilter } from "../../utilities/utilities";
+  import { getData, debounce } from "../../utilities/helperFunctions";
+  import { searchFilter } from "../../utilities/stores";
 
-  let users;
-  let posts;
   let searchString = "";
   $: searchFilter.set(searchString);
 
@@ -39,10 +38,6 @@
     }
   }
 </script>
-
-<style>
-
-</style>
 
 <div class="card my-4">
   <label for="search" class="h5 card-header">Search</label>

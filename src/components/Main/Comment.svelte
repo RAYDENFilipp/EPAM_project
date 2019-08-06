@@ -2,18 +2,16 @@
   import {
     getData,
     parseDate,
-    sendData,
-    postObject,
-    userLoggedIn
-  } from "../../utilities/utilities";
+    sendData
+  } from "../../utilities/helperFunctions";
+  import { postObject, userLoggedIn } from "../../utilities/stores";
+
   export let user_id, comment, date, index, authorId;
   let comments = $postObject.comments;
   let postId = $postObject.id;
 
   const { month, year, datePrefixed, hours, minutes } = parseDate(date);
-  const userPromise = getData(`/users?id=${user_id}`).then(
-    userArray => userArray[0]
-  );
+  const userPromise = getData(`/users/${user_id}`);
 
   function deleteComment() {
     comments.splice(index, 1);

@@ -1,5 +1,5 @@
 <script>
-  import { pagePicked } from "./utilities/utilities.js";
+  import { pagePicked } from "./utilities/stores";
   import Navbar from "./components/Navbar/Navbar.svelte";
   import Login from "./components/Login/Login.svelte";
   import Imageslider from "./components/Imageslider/Imageslider.svelte";

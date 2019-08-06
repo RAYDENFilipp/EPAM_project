@@ -1,11 +1,6 @@
 <script>
-  import {
-    submitType,
-    deleteCookie,
-    userLoggedIn,
-    sendData,
-    pagePicked
-  } from "../../utilities/utilities";
+  import { deleteCookie, sendData } from "../../utilities/helperFunctions";
+  import { submitType, userLoggedIn, pagePicked } from "../../utilities/stores";
   export let collapsed = true;
 
   let links = [
@@ -13,8 +8,6 @@
     { active: false, href: "#about", text: "About" },
     { active: false, href: "#contacts", text: "Contacts" }
   ];
-
-  let timeScroll;
 
   function handleClick(active, href, e) {
     if (!active) {
