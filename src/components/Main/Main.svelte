@@ -1,7 +1,6 @@
 <script>
   import { afterUpdate } from "svelte";
   import { fade } from "svelte/transition";
-  import Footer from "../Footer/Footer.svelte";
   import Imageslider from "../Imageslider/Imageslider.svelte";
   import Pagination from "./Pagination.svelte";
   import PendingSpinner from "./PendingSpinner.svelte";
@@ -101,5 +100,9 @@
     </div>
 
   </main>
-  <Footer />
+  <footer class="py-md-4 py-2 bg-dark text-light">
+    <div class="container text-center">
+      <h4>Philipp Lypniakov @ {new Date().getFullYear()}</h4>
+    </div>
+  </footer>
 </div>

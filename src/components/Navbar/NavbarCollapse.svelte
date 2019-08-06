@@ -3,26 +3,20 @@
     submitType,
     deleteCookie,
     userLoggedIn,
-    sendData
+    sendData,
+    pagePicked
   } from "../../utilities/utilities";
   export let collapsed = true;
 
   let links = [
-    { active: true, href: "#home", text: "Home" },
-    { active: false, href: "#blog", text: "Blog" },
+    { active: true, href: "/", text: "Home" },
+    { active: false, href: "#about", text: "About" },
     { active: false, href: "#contacts", text: "Contacts" }
   ];
 
   let timeScroll;
 
   function handleClick(active, href, e) {
-    // to clear previous click window.hash delayed update
-    clearTimeout(timeScroll);
-    const userAgent = window.navigator.userAgent;
-    const element = document.querySelector(href);
-    // /avoid preventing default since this feature won't work in IE 11
-    if (!~userAgent.indexOf("Trident")) e.preventDefault();
-
     if (!active) {
       links = links.map(link => {
         link.active =
@@ -31,23 +25,7 @@
       });
     }
 
-    scrollSmoothly(element);
-    // Add hash (#) to URL (default click behavior)
-    // Also we have to ensure that our scroll ends before the window.hash update
-    timeScroll = setTimeout(() => (window.location.hash = href), 730);
-  }
-
-  function scrollSmoothly(element) {
-    const main = document.querySelector("[data-window='main']");
-    const bodyPadding = window.getComputedStyle(document.body).paddingTop;
-
-    main.scrollTo({
-      behavior: "smooth",
-      top:
-        element.getBoundingClientRect().top +
-        main.scrollTop -
-        parseInt(bodyPadding)
-    });
+    pagePicked.set(href);
   }
 </script>
 
