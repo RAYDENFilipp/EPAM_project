@@ -1,16 +1,16 @@
 <style>
   iframe {
-    height: 300px;
+    height: 350px;
     width: inherit;
   }
 </style>
 
 <div class="container">
-  <article class="d-flex flex-column justify-content-around align-items-center">
+  <article class="row justify-content-around align-items-center">
 <!-- Contacts info -->
-    <section class="col-lg-6 pt-5 w-50">
-      <h2 class="text-uppercase text-center mb-4">Find us</h2>
-      <p class="h5 mb-0">
+    <section class="col-6 pt-5">
+      <h2 class="text-uppercase text-center mb-4 w-40">Find us</h2>
+      <p class="h5 mb-0 w-40">
         Solomianska St, 7,
         <br />
         Kyiv, 03110
@@ -43,9 +43,9 @@
     </section>
 
     <!-- Map -->
-    <div class="col-lg-6 pb-3 mt-3 mt-md-5">
+    <div class="row col-12 pb-3 mt-3 mt-md-5">
       <iframe
-        class="border-0"
+        class="border-0 mx-auto w-md-50"
         title="State University of Telecommunications on the map"
         src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d12090.613512847922!2d30.46984709125832!3d50.4273456508177!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x638e8cfbdbe5fddc!2sState+University+of+Telecommunications!5e0!3m2!1sen!2sua!4v1564161731057!5m2!1sen!2sua"
         allowfullscreen />
