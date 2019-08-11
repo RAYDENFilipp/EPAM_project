@@ -9,7 +9,7 @@
   }
 
   iframe {
-    height: 350px;
+    height: 63vh;
     width: inherit;
   }
 </style>

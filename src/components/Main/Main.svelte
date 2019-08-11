@@ -38,6 +38,10 @@ or main element scrolls up
     height: inherit;
     overflow-y: scroll;
   }
+  
+  [id="blog"] {
+    height: 58vh;
+  }
 
   .invisible {
     display: none;
