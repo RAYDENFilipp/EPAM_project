@@ -2,6 +2,7 @@
   import img1 from "../../media/about_cabins.jpg";
   import img2 from "../../media/about_space.jpg";
   import img3 from "../../media/about_tree.jpg";
+  import Footer from "../Footer/Footer.svelte";
 </script>
 
 <style>
@@ -71,4 +72,5 @@
 
   </article>
 
+<Footer />
 </div>

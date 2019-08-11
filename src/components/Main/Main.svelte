@@ -9,6 +9,7 @@
   import PostItem from "./PostItem.svelte";
   import SearchWidget from "./SearchWidget.svelte";
   import SortWidget from "./SortWidget.svelte";
+  import Footer from "../Footer/Footer.svelte";
   import { getData } from "../../utilities/helperFunctions";
   import {
     postPicked,
@@ -108,9 +109,5 @@ or main element scrolls up
     </div>
 
   </main>
-  <footer class="py-md-4 py-2 bg-dark text-light">
-    <div class="container text-center">
-      <h4>Philipp Lypniakov @ {new Date().getFullYear()}</h4>
-    </div>
-  </footer>
+<Footer />
 </div>
