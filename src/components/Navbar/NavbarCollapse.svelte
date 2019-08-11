@@ -4,7 +4,7 @@
   export let collapsed = true;
 
   let links = [
-    { active: true, href: "/", text: "Home" },
+    { active: true, href: "#home", text: "Home" },
     { active: false, href: "#about", text: "About" },
     { active: false, href: "#contacts", text: "Contacts" }
   ];
