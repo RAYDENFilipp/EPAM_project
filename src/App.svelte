@@ -8,12 +8,18 @@
   import Contacts from "./components/Contacts/Contacts.svelte";
 </script>
 
+<style>
+  :global(body) {
+    height: 100vh;
+  }
+</style>
+
 <Navbar />
+<Login />
 {#if $pagePicked === '#about'}
   <About />
 {:else if $pagePicked === '#contacts'}
   <Contacts />
 {:else}
-  <Login />
   <Main />
 {/if}
