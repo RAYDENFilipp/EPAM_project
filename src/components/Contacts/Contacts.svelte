@@ -18,7 +18,7 @@
   <div class="container w-100">
     <article class="row justify-content-around align-items-center">
       <!-- Contacts info -->
-      <section class="col-6 pt-4">
+      <section class="col-8 pt-4">
         <h2 class="text-uppercase text-center w-40">Find us</h2>
         <p class="h5 mb-0 w-40">
           Solomianska St, 7,

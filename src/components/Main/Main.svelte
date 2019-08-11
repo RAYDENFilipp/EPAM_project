@@ -38,7 +38,7 @@ or main element scrolls up
     height: inherit;
     overflow-y: scroll;
   }
-  
+
   .failed, .pending {
     height: 58vh;
   }
