@@ -3,26 +3,26 @@
   import { fade } from "svelte/transition";
 
   /* Media to bundle */
-  import "../../media/img_lights_wide.jpg";
-  import "../../media/img_mountains_wide.jpg";
-  import "../../media/img_nature_wide.jpg";
+  import img1 from "../../media/img_lights_wide.jpg";
+  import img2 from "../../media/img_mountains_wide.jpg";
+  import img3 from "../../media/img_nature_wide.jpg";
 
   let images = [
     {
       id: 0,
-      src: "./media/img_lights_wide.jpg",
+      src: img1,
       caption: "First title",
       color: "text-light"
     },
     {
       id: 1,
-      src: "./media/img_mountains_wide.jpg",
+      src: img2,
       caption: "Second Title",
       color: "text-light"
     },
     {
       id: 2,
-      src: "./media/img_nature_wide.jpg",
+      src: img3,
       caption: "Third Title",
       color: "text-light"
     }
