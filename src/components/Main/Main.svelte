@@ -39,7 +39,7 @@ or main element scrolls up
     overflow-y: scroll;
   }
   
-  [id="blog"] {
+  .failed, .pending {
     height: 58vh;
   }
 
