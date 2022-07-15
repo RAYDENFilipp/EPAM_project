@@ -18,7 +18,7 @@
         "rollup-plugin-url": "^2.2.2",
         "stylelint": "^9.10.1",
         "stylelint-config-suitcss": "^14.0.0",
-        "svelte": "^3.6.9"
+        "svelte": "^3.49.0"
     },
     "dependencies": {
         "autoprefixer": "^9.6.1",
